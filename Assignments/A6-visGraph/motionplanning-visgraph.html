@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<style type="text/css">
+body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=5;color:black}
+h2 { font-size=4; color:blue}
+h3 { font-size=3; color:gray;}
+</style>
+
+
+
+<html> <head>
+<title></title>
+</head>
+
+<body> 
+
+
+<h1>Motion planning via visibility graph: Point robot moving among polygonal obstacles in 2D </h1>
+
+
+
+<p> One of the fundamental problems in robotics is motion planning:
+given a robot <tt>R</tt> and an environment (or physical space), a
+start position <tt>p<sub>start</sub></tt> and an end position
+<tt>p<sub>end</sub></tt>, find a path so that the robot can move from
+start to end, without collisisons.
+
+
+<p>Sometimes, depending on the problem, we might want the <i>shortest
+path</i> from <tt>p<sub>start</sub></tt> to <tt>p<sub>end</sub></tt>;
+other times just <i>a path</i> (not necessarily the shortest) may be
+sufficient.
+
+
+<p>General motion planning is difficult. We'll make the following 
+(simplifying) assumptions: <ul>
+
+  <li><b>2D:</b> We'll look at the 2-dimensional motion planning problem: we'll
+  assume that the environment consists of a set of 2D polygons that
+  represent the obstacles; and the robot is a 2D-polygon (convex or
+  not) and does not have joints (i.e. not an articulated robot).
+
+    Furthermore, we assume that the robot is moving in a large bounding
+    box B that contains all polygons.
+
+  <li><b>Static:</b> We'll assume that the environment is static (the
+  obstacles are fixed).
+
+  <li><b>Known:</b> The environment is known, i.e. the robot knows the
+list of obstacles with their vertices and edges.  That is, the robot
+does not rely on sensors to learn the environment, instead the
+environment is given.  </ul>
+
+<b>Notation:</b>  we'll assume that the obstacles consist of <tt>n</tt>
+edges. So for us <tt>O(n)</tt> represents the complexiy of the
+obstacles (vertices plus edges). 
+
+
+
+<h3>Motion planning with a roadmap</h3>
+
+The general idea of motion planning is to start by computing a
+decomposition of the <i>free space</i> (the space where the robot can
+move) into cells, and construct a <i>road map</i> of the free space to
+guide the motion between neighboring cells. The road map is
+essentially a graph of  free space.  Ideally we want to build the
+roadmap so that so that:
+
+<ol>
+<li>Any path in the road map corresponds to a collision-free path in the free space.
+
+<li>Any path in the free-space corresponds to a path in the road map.
+
+</ol>
+
+If we are able to compute a road map of free space with these
+properties, then to move from <tt>s</tt> to <tt>t</tt>, we find a path
+in the road map from <tt>s</tt> to <tt>t</tt>. We know that any path
+in the road map is colision-free (by (1)), and we know that if a path
+in the road map does not exist, then no path exists (by (2)).
+
+Essentially we have reduced the motion planning problem to a path
+problem in a graph.
+
+<p>Different types of motion planning problems  will require different types of roadmaps. 
+
+<p>The simplest problem is a <i>point robot</i> moving among polygonal
+ obstacles in 2D.
+
+Two types of roadmaps  are used: 
+
+<ol>
+
+<li><p><b>Trapezoidal decomposition:</b> The free space can be
+decomposed as follows: from each vertex, shoot a vertical ray above
+and below, until it intersects with an edge (or the bounding box
+B). This is called a
+<i>trapezoidal decomposition</i>, and we have seen something very
+similar when we talked about polygon triangulation; in this case we
+have a set of polygons, not just one, but the idea is the same.  This
+trapezoidal decomposition can be computed using standard
+techniques. Each trapezoid corresponds to a region of the free
+space. To guide movement between adjacent trapezoids, we can construct
+a road map as follows: we place one node in the center of each
+trapezoid, and we place one node in the middle of each vertical
+edge. There is an arc between two nodes if and only iff one node is in
+the center of a trapezoid and the other node is on the boundary of
+that same trapezoid.  The figure below illustrates this (from 4M
+book).  A path from start to end can be found via BFS in the road
+map. It can be shown that the road map has linear complexity
+<tt>O(n)</tt>, which is good.  But, paths obtained with this approach
+are not necessarily shortest.
+
+In summary, the roadmap idea is a useful thing to remember in general,
+but in the simple case of a point robot moving in 2D, we can do
+better.
+
+<center>
+<img src="roadmap1.png" border="0" height="250"
+align="middle">
+<img src="roadmap2.png" border="0" height="250"
+align="middle">
+</center>
+
+
+<li><p><b>The visibility graph:</b> A different type of road map that can
+be used for finding shortest paths is the <i>visibility graph</i>:
+this is a graph whose vertices are the vertices of the obstacles, and
+its edges <tt>(u,v)</tt> are all the pair of vertices that can "see"
+each other, that is, segment <tt>uv</tt> does not intersect the
+interior of any obstacle. Below are some screenshots (the first screenshot is from
+<tt>http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/16311/www/s06/lecture/lec8.html</tt>).
+
+
+
+<center>
+<img src="visgraph.png" border="0" height="200" align="middle">
+
+<img src="samanjVG.png" border="0" height="300" align="middle">
+
+<img src="sonVG.png" border="0" height="300" align="middle">
+
+</center>
+
+
+<p>Shortest paths in 2D have the very nice and convenient property that
+they are straight lines, and they have to go through the vertices of
+the obstacles.  This basically means that any shortest path will be
+contained in the VG. Once the visibility graph (VG) is computed, the
+shortest paths from start to end can be computed for e.g. using
+Dijkstra's algorithm.
+
+<p>Perspective: The problem with the VG approach is that the VG may
+have quadratic complexity in the worst case, and any approach that
+computes the whole VG is doomed to quadratic complexity. It would be
+nice to compute the shortest path from <tt>s</tt> to <tt>t</tt> on the
+fly, without using at least quadratic time and space to compute and
+store the VG.This was an open problem for a while; the quadratic
+barier was first broken by Joe Mitchell, and subsequently Hershberger
+and Suri (1993) described an optimal (n lg n) algorithm called the
+<i>continuous Dijkstra</i> algorithm. Feel free to search if you are
+curious.
+
+</ol>
+
+
+<h2>This assignment: Motion planning via VG  for a point robot moving among
+polygonal obstacles in 2D</h2>
+
+<ol>
+
+ <p> <li>Generate a scene consisting of multiple polygonal obstacles and
+a start and end position. Have a pre-set scene, but also allow the
+user to enter the obstacles by clicking the mouse.
+
+
+<p>  <li>Compute and render the visibility graph.
+  
+ <p> <li>Run Dijkstra's algorithm on the VG and render the resulting path
+(for e.g. in a different color and different line width).
+
+</ol>
+
+
+<h2>Extra features</h2>
+
+<ul>
+<li> Implement a point-in-polygon method and use it to detect if start or end points  are inside an obstacle. 
+<li> Detect if a polygon is self-intersecting. 
+<li> Detect if polygons are overlapping.  
+<li> Draw the polygons <b>filled</b>. Note that openGL can only fill
+correctly convex polygons, so if you want it filled, you'll need to
+provide a triangulation.
+
+</ul>
+
+
+<h2>What to turn in</h2> 
+
+<ul>
+<li>push your code in your github repo 
+<li>you will fill a self report in class
+</ul>
+
+<h2>Enjoy!</h2> 
+  
+
+<hr>
+
+<h2>Grading</h2>
+<ul>
+  <li>+50 points: find al edges in VG, no more, no less (no missing edges, no extraneous edges)
+  <li>+20 points: compute shortest path and display it 
+  <li>+10: the user is able to click and select new start and end positions 
+</ul>
+
+Code Style: 20 points
+<ul>
+<li>+0-10 points: poor to medium code.
+<li>+10-20 points: medium to excellent code.
+</ul>
+
+
+
+
+<address></address>
+</body> </html>

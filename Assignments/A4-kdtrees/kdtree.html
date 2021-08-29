@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+
+<style type="text/css">
+body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=5;color:black}
+h2 { font-s1ize=4; color:blue}
+h3 { font-size=3; color:gray;}
+</style>
+
+<html> <head>
+<title></title>
+</head>
+
+<body>
+<h2>Building a 2d-tree</h2>
+
+
+In this assignment the goal is to build and visualize a
+two-dimensional kd-tree for a set of points in the plane.  
+<ol>
+<li>Part 1: build the kd-tree.
+<li>Part 2: render/visualize the kd-tree, and make it look like a Mondrian painting.
+</ol>
+
+
+
+
+<h2>Representing the kd-tree</h2>
+
+<p>For this asignment, make your <tt>point2D</tt> store the coordinates as doubles, not ints. 
+
+<p>You will need to define a data structure to encode a kd-tree
+such as below --- feel free to refine as needed.
+
+<pre>
+typedef struct _treeNode {
+     point2D p; /* If this is a leaf node,  p represents the point stored in this leaf. 
+                  If this is not a leaf node,  p represents the horizontal or vertical line
+                  stored in this node. For a vertical line, p.y is
+                  ignored. For a horizontal line, p.x is ignored
+                */
+     char type; / * this can be 'h' (horizontal) or 'v' (vertical), or 'l' (leaf)
+                    depending whether the node splits with a horizontal line or  vertical line.
+                    Technically this should be an enum.
+                */
+     treeNode  *left, *right; /* left/below and right/above children. */
+} treeNode; 
+
+typedef struct _kdtree{
+   treeNode* root; 
+
+   int count; //number of nodes  in the tree
+
+   int height; //height of tree
+} kdtree; 
+</pre>
+
+
+In c++, it will look more like this: 
+
+<pre>
+class TreeNode {
+  private: 
+     point2D* p; 
+     char type; 
+     TreeNode *left, *rigt; 
+  public: 
+     TreeNode(Point2D*); 
+     ~TreeNode();
+};
+
+class Kdtree {
+  private: 
+     TreeNode* root; 
+     int count ; //number of leaves in the tree
+     int height;  //height of the tree
+
+     //build the kd-tree
+     TreeNode* buildKdtree(Point2D* sortedbyx, Point* sortedbyy, int n, int cuttype); 
+
+  public:
+     Kdtree(Point2D* p, int n );
+     ~Kdtree();
+     ...
+};
+</pre>
+
+
+<p><b>Note: Feel free to use Vectors instead of arrays everywhere. </b> 
+
+
+<p>You'll need to write the basic primitives for operating on a treeNode and
+on a kdtree, such as creating a node and creating an empty tree, printing a
+node, and printing a tree.
+
+
+<p> For example, include a function that prints some basic info about the kd-tree,
+such as number of nodes, and height. Call this function in the main
+functin so that we can see its output. 
+
+
+<h2>Building a kd-tree</h2>
+
+<p>The function will take as argument an array of points and returns the kd-tree. 
+
+<p>In C it might look like this: 
+
+<pre>
+/* Build a kd-tree for the set of n points, where each leaf cell
+   contains  1 point. 
+   Return a pointer to the root.
+*/
+kdtree*  buildkdtree(point2D* points, int n)
+</pre>
+
+In cpp write a constructor that looks like this:
+
+<pre>
+  public:
+     Kdtree(Point2D p[], int n );
+</pre>
+
+
+
+
+<p>Note: Since your coordinates are doubles and you generate the
+points randomly, its unlikely that you'll get coincident points in
+your set of points. If your coordinates are ints, you'll need to
+consider this issue. Below we assume that the points are
+<b>distinct</b>.
+
+
+<p>The generic constructor should first sort the points by
+Sort <tt>points</tt> by x-coord and by y-coord using system
+<tt>qsort</tt>. 
+
+<pre>
+point2D *points-by-x, *points-by-y; 
+//allocate them, copy data from points then sort them 
+</pre>
+
+<p>You need to use system qsort and define appropriate comparison
+functions.
+
+Points that have same x-coordinate or same y-coordinate can cause
+issues with the partition (for example...). To handle these cases
+elegantly think of using comparison functions that uniquely order the
+points:
+
+
+<pre>
+//orders the points by x, and for same x in y-order
+int leftToRightCmp(Point2D a, Point2D* b) {
+    ...
+}
+
+//orders the points by y, and for same y in x-order
+int bottomToTopCmp(Point2D a, Point2D* b) {
+   ...
+}
+</pre>
+
+
+<p>After sorting the points, the function shoudl call a helper
+function that takes more arguments and is recursive. In C it may look
+like this:
+
+
+<pre>
+treeNode* kdtree_build_rec(point2D* points-sorted-by-x, point2D* points-sorted-by-y, int n, ...)
+ </pre>
+
+In cpp it may look like this:
+<pre>
+TreeNode* Kdtree::buildKdtree(Point2D* points-sortedbyx, Point* points-sortedbyy, int n, int cuttype); 
+</pre>
+
+This helper function should build the kd-tree recursively. It should
+probably take the depth of the current node as a parameter and use it to
+decide whether to split vertically or horizontally. 
+
+
+
+
+<h2>The median and degenerate cases</h2>
+
+
+<p>The main challenge in this function will be make sure the recursion
+stops.
+
+<p> Stop the recursion when the node contains 1 point (and possibly
+earlier if necessary, depending on how you handle degenerate cases).
+
+
+<p>The median is the value in the middle index of the sorted array
+(sorted by x or by y, depending on the type of node).  One way to set
+up the recursive calls is to put all points with x-coord smaller or
+equal to the median to the left, and the others on the right.  Think
+of what happens when you have points with same coordinates, for
+example consider the case of points on the same vertical line. All
+x-coordinates are the same, and if you distribute all the points with
+x-coord smaller or equal to the median to the left, all points end up
+on the left side. You need to think if its possible to generate
+infinite recursion.
+
+<p>For e.g. consider the points <tt>(2,6), (3,6), (3,5)</tt> examined
+in the x-coordinate. Middle point is (3,6). But the third's point
+x-value is also 3, so it will go on the left side. Thus this passes
+the entire array to the next level. Then we examine them in the
+y-coordinate: <tt>(3,5), (3,6), (2,6)</tt> Middle point is (3,6). But
+the third point has same y-coord as the median, which means it will
+also go on the left side. Thus this passes entire array to next level
+again, i.e. infinite recursion. These points are not coincident but
+are collinear in just the wrong way to cause infinite recursion.
+
+<p>There are other ways to handle this, but an elegent way is to use
+the <tt>leftToRightCmp()</tt> instead of just comparing by
+x. In <tt>leftToRight</tt> order, no two points are equal (unless
+there are duplicate points, which we assume there aren't).  All points
+before the median are strictly smaller than the median <tt>in
+leftToRight</tt> order. Put differently, a point <tt>p</tt> goes to
+the left of the median if <tt>p</tt> is smaller than the median
+in <tt>leftToRight()</tt> order, and goes to the right of the median
+otherwise. This way points are distributed evenly left and right and
+there is no infinite loop. It all works simply, when using the right
+comparator.
+
+
+
+
+<h2>Maintaining <tt>points-by-x</tt> and <tt>points-by-y</tt> through
+the recursive calls</h2>
+
+Allocate the sorted arrays for the recursive calls
+
+<pre>
+P1-sorted-by-x, P1-sorted-by-y
+P2-sorted-by-x, P2-sorted-by-y
+</pre>
+
+(you know their sizes), then do a pass through
+<tt>points-sorted-by-x</tt> and <tt>points-sorted-by-y</tt> and put
+them on the correct side.
+<pre>
+ if leftToRight(p, median) == -1: p goes to P1
+ else p goes to P2
+</pre>
+
+<p>In case you allocate the arrays (as opposed to using Vectors):
+Don't forget to free the arrays that you are done with, as there is no
+garbage collection in c/cpp.
+
+
+
+<h2>Testing</h2>
+
+It goes without saying that you need to throroughly test your code.
+The goal of testing is to find bugs.  Try to break your code. Once you
+find a bug, try to reproduce it on the smallest possible input ----
+it's no fun debugging on an input of half a million points.
+
+<p>Once it works on small inputs, run on sets of random points with
+values for various <tt>n</tt>. Make it so that when you press the
+space bar you get a different set of random points.
+
+
+<p>Teams shoud generate special initializers and everyone should include
+everyone's test cases in their code.
+
+
+
+<hr>
+<h2>Part 2: Rendering the kd-tree</h2>
+
+Write a function that renders the kd-tree in OpenGL.  
+Use the code for the previous assignments.  The OpenGL part  is
+pretty easy --- basically you need  to draw a filled rectangle/polygon for each leaf node, corresponding to teh regionof that leaf. 
+
+<p>This means you shoud probably store regions in nodes.
+
+<p>The input points are generated in the range [0,WINDOWSIZE] x [0,
+WINDOWSIZE]. This is the region fo the root.
+
+
+<p>Render your kd-tree so that it looks similar to a Mondrian painting:
+
+ <center>
+
+<a href="mondrian1.pdf"><img src="mondrian1.pdf" border="0" height="300" align="middle"></a>
+<a href="mondrian2.png"><img src="mondrian2.png" border="0" height="300" align="middle"></a>
+<a href="mondrian3.png"><img src="mondrian3.png" border="0" height="300" align="middle"></a>
+<a href="mondrian4.png"><img src="mondrian4.png" border="0" height="300" align="middle"></a>
+
+
+</center> 
+
+
+
+
+
+<h3>Team work</h3>
+
+You are encouraged to do pair-programming, but feel free to work
+alone.
+
+
+<h3>What and  how to turn in</h3>
+
+You received the assignment on GitHub.  Provide a README that
+describes the state of your code (does it work on all test cases, do
+you know of any bugs, any extra features).
+
+
+
+
+<h2>Enjoy!</h2>
+
+
+
+
+
+</body> </html>

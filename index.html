@@ -1,0 +1,206 @@
+
+<!-- saved from url=(0080)https://tildesites.bowdoin.edu/~ltoma/teaching/cs3250-CompGeom/fall21/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css"><!--
+p.candy { float: left; }
+-->
+</style>
+
+
+</head><body>
+<center>
+<a href="http://academic.bowdoin.edu/computerscience/"><img src="./index_files/bowdoinlogo.jpg" alt="[Bowdoin Computer Science]" border="0" height="40" align="middle"></a>
+<h2>CS 3250: Computational Geometry 
+</h2>
+<h4>Fall 2021:  M, W 1:15 - 2:40 in Searles 126</h4>
+</center>
+
+
+
+<center>
+</center>
+
+
+<hr>
+<center>
+<p>
+ <a href="https://tildesites.bowdoin.edu/~ltoma/teaching/cs3250-CompGeom/fall21/syllabus.html">Detailed schedule</a> | <a href="https://github.com/bowdoin-cg-fall21"> Github link</a> |  <a href="https://tildesites.bowdoin.edu/~ltoma/teaching/cs3250-CompGeom/fall21/assignments.html">Assignments</a> | <a href="https://bowdoincomput-74k1525.slack.com/">Slack link</a>
+</p></center>
+<hr>
+
+<p> Welcome to Computational Geometry, Fall 2021!
+
+</p><p>Computational geometry studies algorithms for problems that involve
+ geometric data: (finite) sets of points, line segments and
+ polygons.
+
+It  is a young and growing field, driven by
+applications in graphics, robotics, autonomous vehicles, vision, image
+processing, and GIS.
+
+Some classical examples of geometric problems: Is a point inside or
+outside a
+polygon? Do two polygons intersect?  Given a set of points in the plane,
+what is  the closest pair of points? What is  the smallest convex polygon
+that contains a set of points in the plane? What are all the points that fall in a given query
+range?  What is visible from a point in a polygon? How many points are
+sufficient to guard any polygon?  Given two sets of segments, what are
+their intersections?   Given a set of points, what is their smallest
+enclosing circle? Given a set of polygonal obstacles, and a polygonal
+robot moving in 2D with tramnslation and rotation, what is an
+efficient path  between a start and end location?  And many others.  
+
+</p><p>This class is an introduction to computational geometry:
+
+
+
+</p><p><strong>Syllabus overview: </strong>
+
+</p><ul>
+  <li>Introduction and warmup
+    <ul>
+      <li>Finding collinear points
+      </li><li>Finding the closest pair of points
+    </li></ul>
+    
+    </li><li>Geometric primitives
+    <ul>
+      <li>area of triangle, orientation, segment intersection. 
+    </li></ul>
+    
+    </li><li>Convex hulls in 2D and 3D 
+    <ul>
+      <li>naive, gift wrapping, quickhull, Graham
+      scan, incremental, divide-and-conquer algorithm
+      </li><li>lower bound
+      </li><li>3D hulls 
+    </li></ul>
+    </li><li>Segment intersection 
+    <ul>
+      <li>Bentley-Ottman sweep 
+    </li></ul>
+    
+    </li><li>Art gallery problem. Fisk's sufficiency proof.
+    </li><li>Polygon triangulation 
+    <ul>
+      <li>quadratic, based on ear removal algorithm.
+      </li><li>triangulation of monotone polygons.
+      </li><li>polygon triangulation in O(n lg n) via trapezoidalization. 
+    </li></ul>
+    </li><li>Geometric searching
+    <ul> <li>orthogonal range searchiing with kd-trees and range trees.
+    </li></ul>
+    
+    </li><li><del>Voronoi diagrams and Delaunay triangulations.</del>
+    </li><li>Motion planning in 2D
+    <ul>
+      <li>shortest path in a simple (non-convex) polygon with the funnel algorithm.
+      </li><li>shortest paths among polygonal obstacles via visibility graph.
+      </li><li>computation of the VG with plane sweep.
+    </li></ul>
+    </li><li>Motion planning in 3D.
+  </li></ul>
+  
+  
+  
+
+<p><strong>Prerequisites</strong>: Data Structures (cs2100), 
+Algorithms (cs2200) and Systems (2310).   In other words, knowledge of:
+</p><ul>
+  <li>basic analysis: asymptotic notation, growth, solving recurrences. 
+  </li><li>basic algorithm design techniques: divide-and-conquer, greedy. 
+  </li><li>basic algorithms and data structures: searching, sorting, binary search trees,  priority queues. 
+  </li><li>basic programming in C/C++
+  </li><li>basic Unix, working from a terminal, compiling using a Makefile
+</li></ul>
+
+<p><strong>CS curriculum:</strong> This is a 3000-level class that
+fullfills the Algorithms/Theory requirement. Although it has lots of
+programming, it is <b>not</b> a projects
+class.  
+
+</p><p><strong>Discussion forum</strong> We will use <a href="https://slack.com/">Slack</a> to facilitate communication and discussion outside of class. Please try to use this forum and avoid sending  email ---- your classmates  will benefit from seeing everyone else's questions  and answers. You are encouraged to follow the posts on Slack and jump into the discussion. If you want to send me a private message, you can direct message (DM) me on Slack. Another nicer feature of Slack is that you'll be able to create your own channels for group work. 
+
+
+</p><p><strong>TAs:</strong>
+</p><ul>
+  <li>n/a (no alums in the pipeline) 
+</li></ul>
+
+<p><strong>Office hours:</strong> 
+</p><ul>
+<li>tbd
+</li></ul> 
+
+
+
+<p><strong>Class webpage:</strong>
+<i>http://tildesites.bowdoin.edu/~ltoma/teaching/cs3250-CompGeom/fall21/</i>. This
+is hosted on my personal website at Bowdoin and will contain all
+class-related materials throuoghout the semester. You can bookmark this page
+or you can follow the link from my website. 
+
+We will use the class Blackboard site very minimally. 
+
+
+
+</p><p> <strong>Textbooks:</strong>
+
+There is no required textbook. The course is based on two classical
+textbooks, below.  You can find them in Searles 224 (you're more than welcome to
+read them, but please do not take them out of 224). 
+</p><ul> <li><a href="http://www.amazon.com/Computational-Geometry-Cambridge-Theoretical-Computer/dp/0521649765/ref=sr_1_3?ie=UTF8&amp;qid=1389985599&amp;sr=8-3&amp;keywords=computational+geometry">Computational
+  geometry in C. </a> J. O'Rourke.
+
+  </li><li><a href="http://www.amazon.com/Computational-Geometry-Applications-Mark-Berg/dp/3540779736/ref=pd_bxgy_b_img_z">Computational geometry: algorithms and applications</a>. Mark de Berg, Otfried
+   Cheong, Mark van Kreveld, Mark Overmars.  </li></ul>
+
+
+
+
+<p><strong>Work and Grading: </strong> The work for the class will
+come from programming assignments (approximately biweekly), with class
+engagement/participation serving as a tie breaker. The assignments are
+   weighed equally,  so each one is worth approx. 14.3% of the final
+   grade. 
+
+
+</p><p><strong>Collaboration policy:</strong>  You can work alone, or you can pair with a
+partner (pair-programming).  
+
+   </p><ul>
+     <li> <b>Collaboration across teams is at level-1: </b><i> </i> that is, verbal
+   collaboration without solution sharing. You are allowed and
+   encouraged to discuss ideas with other class members, but the
+   communication should be verbal and additionally it can include
+   diagrams on board. Noone is allowed to take notes during the
+   discussion (being able to recreate the solution later frommemory is
+   proof that you actually understood it). Communication cannot
+   include sharing pseudocode for the problem. Please read the <a href="https://turing.bowdoin.edu/dept/collab.php">department's
+   collaboration policy</a>.
+
+
+   <p></p></li><li><b>Pair programming policy</b>: <i>If you chose to work with
+   a partner, you must work together, physically in the same place,
+   for the entire project that you do together. The overall project
+   must be a true joint effort, equally owned, created and understood
+   by both partners.
+   
+   Specifically splitting the problem into parts and working on them separately is not allowed and violates the honor code for the class.
+   
+   If you start together as a team and are unable to complete the project together, then you will each inherit teh shared code, and split up to work individually on the remainder of the project. You would then submit individually, with a note on what happened.
+</i>
+
+      
+   <p>There are many advantages to working with a partner (e.g. more fun,
+   more learning, good skill for the "real world"), and I encourage you
+   to try.
+   
+   You may also consider alternating between working alone and with a
+   partner, and changing partners.
+
+
+   </p><p>Remember that you are responsible for reading, understanding, and adhering to the policy. If you have any questions about any aspects of the policy, please do not hesitate to ask for clarification.
+</p></li></ul>
+
+</body></html>

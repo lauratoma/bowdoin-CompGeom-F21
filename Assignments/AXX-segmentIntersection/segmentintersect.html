@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<style type="text/css">
+body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=5;color:black}
+h2 { font-s1ize=4; color:blue}
+h3 { font-size=3; color:gray;}
+</style>
+
+<html> <head>
+<title></title>
+</head>
+
+<body>
+<h2>Assignment:  Orthogonal segment intersection</h2>
+
+
+
+
+
+<p> In this assignment the goal is to write code to compute the
+intersections of a set of segments in the plane. For simplicity, you
+can assume that the segments are orthogonal.
+
+<h3>The algorithm</h3> 
+
+You will implement the line sweep approach discussed in class.
+
+
+<h3>Degeneracies</h3> For simplicity you can assume that the segments
+do not overlap. They may intersect at endpoints though, and you need
+to handle this case.
+
+
+<h3>Base code</h3> Base code is provided with the assignment's GitHub
+repository.
+
+The code should compile as is, but it does not do anything besides the
+interface.  You need to complete it so that it simulates the sweep.
+
+
+<p>The intended logic of the code is the following:
+<ul>
+
+<p><li> Every time it's called, display() renders the segments, the AS, the
+sweep line and the intersection points.
+
+<pre>
+  draw_segments();
+  draw_active_structure(); 
+  draw_intersection_points(); 
+  draw_sweep_line(); 
+</pre> 
+
+<p><li>Initially, the AS and the intersection points are empty. The events
+are sorted. The sweep line is on the first event.
+
+<pre>
+//current event
+int current_event = 0; 
+
+//sweep_line_x holds current position of sweep line. Initially set to 0. 
+int sweep_line_x = 0;
+</pre> 
+
+<p><li>You'll use a timer function. This is a function that is called
+every millisecond or so by the system.  The code registers this
+function, in a similar way as it registers the function that handles
+the rendering and the function tha thandles the key presses.
+
+<pre>
+/* register callback functions */
+
+  glutDisplayFunc(display); 
+  glutKeyboardFunc(keypress);
+  glutIdleFunc(timerfunc);  //<-------- we'll use it to animate
+</pre> 
+
+
+<p><p>We implement the timerfunc() as follows:  it  moves the sweep to the next event, 
+processes it accordingly, updates  the AS and the vector of intersection points, 
+and calls glutPostRedisplay() (which in turn, calls display()  to re-render). 
+
+
+<p><li>When the user presses 'i' the segmenst are re-initialized, the global
+structures cleared, the events created again and sorted, and the sweep
+restarted.
+
+<pre>
+case 'i': 
+    //CLEAR GLOBAL STRUCTURES AND RE-INITIALIZE SEGMENTS 
+    
+    segments.clear(); 
+    as.clear(); 
+    intpoints.clear(); 
+    
+    //re-initialize 
+    initialize_segments(); 
+    initialize_events();
+   
+    glutPostRedisplay();
+</pre>
+
+</ul>
+
+<h3>What should I write and where?</h3> Part of the work is to
+understand how the code works, what it's supposed to do, and where to
+insert your code. Once you understand, you will see that the actual
+code you need to write is fairly short. You might even enjoy it.
+
+<p>First, get things working using a vector for the AS instead of a
+BBST. This is smart because you separate between getting it to work,
+and getting it to work efficiently.  As always, part of your job as
+programmer and designer of systems is to design it so that you can
+debug it.
+
+<p>Once you are ready for BBSTs, there are a couple of issues you will
+need to think about: how to use binary search trees in cpp (you can
+use sets, or multimaps, which are implemented as BST's), how to write
+the comparator function for the binary search trees; and how to get it
+to do a range search for you.
+
+
+
+<h3>Test cases</h3> Two test cases are provided: initialize_random,
+and initialize_horizontal.  In addition to these two, you will need to
+create a test case that initializes segments on a grid.  Everyone will
+create this test case, and you do not need to share it on piazza.
+
+
+<h3>Share!</h3> Use piazza!  Share on piazza anything that you stumble
+on, and anything you learn while working on the project, so that the
+whole class can benefit.
+
+
+
+<h3>Work in style </h3>
+
+As usual, you need to strive to write not merely code, but simple,
+elegant and easy to understand code. Furthermore, you need to strive
+to do this out of habit, as you start programming, and not only at the
+end. Writing good code has to become your second nature.  Write good
+code not because you have to, but because you don't know any other
+way. 
+
+
+<p>People often disagree what consitutues elegant when it comes to
+coding, but everyone agrees on the following:
+
+<ul>
+  <li>structure your code into small functions with intuitive
+  arguments that allow you to test your code incrementally after every
+  function you add
+  
+  <li>code should be well documented, ideally at block level but
+  certainly at function level.  Every function should have a header
+  specifying what are the expected input values, what is the return value, and what
+  does the function actually do. 
+
+  <li>no function should be longer than a screen
+
+  <li>code should be accompanied by a README tha details how to run
+  it, and whether there are any known bugs that the user shoud be
+  aware of 
+
+  <li>[insert here all style guidelines that you know from pevious classes]
+</ul>
+
+
+<p>How do you know if you write good code? My theory is that the the
+quality of your code is directly proportional to how easy and
+enjoyablet is to debug and update/extend your code.  If you find
+debugging is frustrating and like searching a needle in a haystack,
+then your code style is probably not that good.
+
+
+<h3>Team work</h3>
+
+You are encouraged to do pair-programming, but feel free to work
+alone.
+
+
+<h3>What and  how to turn in</h3>
+
+You received the assignment on GitHub, including the startup code.
+Provide a README that describes the state of your code (does it work
+on all test cases, do you know of any bugs, any extra features).
+
+
+
+
+<h2>Enjoy!</h2>
+
+
+
+<hr>
+<address></address>
+
+</body> </html>

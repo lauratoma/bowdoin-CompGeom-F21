@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<style type="text/css">
+body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=5;color:black}
+h2 { font-size=4; color:blue}
+h3 { font-size=3; color:gray;}
+</style>
+
+
+
+<html> <head>
+<title></title>
+</head>
+
+<body>
+<h1>Fun in an art gallery </h1>
+
+
+<p> In this assignment the goal is to find the visible area of a guard (point)
+inside an art gallery (polygon). 
+
+That is, assume you have an input polygon in the plane  that represents the
+plan of an art gallery, and a point inside this polygon that
+represents a guard. Your task is to implement an algorithm that
+computes and displays the part of the gallery visible to the guard.
+
+To manage complexity we'll split it into two parts: 
+
+<ol>
+
+<li>Part 1: the user can click on points, and the code computes and
+displays the visible area from that point.
+
+
+<p><li>Part 2: Add code so that the guard (last point clicked by the
+user) is moving inside the polygon, and the visible area is
+displayed as the guard is moving. Make it so that the guard does not
+get stuck in a corner of the polygon.
+
+</ol>
+
+
+
+<h2>The interface</h2>
+
+<ul>
+  <li>To make it easy to test, your code will use the mouse to initialize a
+polygon, and also to initialize the position of a guard inside the
+polygon.
+
+You'll find examples on how to use the mouse in the github repo for
+this assignment.
+
+<p><li>The polygon has to be simple. To start, the user should make
+sure that the polygon entered is simple.  Ideally, you'd implement a
+function that tests whether a polygon is simple.
+
+<p><li>The guard has to be inside the polygon. To start, the user
+should make sure it's inside. For extra credit, you can implement a
+function that tests whether a point is inside a polygon ---- we'll
+talk about this in class, and it's a cool little idea (the degenerate
+cases are messy, but there is full pseudocode in the textbook).
+
+
+<p><li>Once the polygon and the guard are set, run your algorithm that
+computes that polygon that's visible and render it with a different
+color.
+
+
+<p>You may have already seen that OpenGL can render a polygon in two
+ways: just its boundary (GL_LINE mode), or <i>filled</i> (GL_FILL
+mode), by turning on one of:
+
+<pre>
+glPolygonMode(GL_LINE);
+//glPolygonMode(GL_FILL);
+</pre>
+
+<p>Something to be aware of is that openGL can only render filled
+polygons that are convex. This seems like a big limitation, however if
+you think about it a little it becomes clear that its not trivial to
+render a non-convex polygon filled.  Essentially you need to compute
+the triangulation of the polygon, and then render one triangle at a
+time. Computing a triangulation of a non-convex polygon is a bigger
+problem in itself, and OpenGL does not do it. 
+
+You'll need to find a different way to render the visible non-convex
+polygon. Ideally it has to be filled.
+
+</ul>
+
+
+
+<h2>Computing the visible polygon</h2>
+
+
+The crux of this assignment is to come up with an algorithm to compute
+the visible polygon of the guard. We have not talked specifically
+about this problem in class, so you need to come up with a solution
+form scratch.  A quadratic algorithm will be fine.
+
+If you can come up with an O(n lg n) algorithm you'll get extra credit
+and a round of applause in class (hint: radial sweep).
+
+(There are some recent papers describing O(n) algorithms).
+
+
+
+<p><embed src="vispolygon.pdf" width="600" height="3000" type='application/pdf'>
+
+
+
+
+
+
+
+<h2>Extra features</h2>
+
+Some ideas: 
+<ul>
+<li>Add more than one guard, both moving, and render the visible area
+transparently, so that the overlap is easy to see.
+<li>Implement testing whether the point is inside the polygon (ray crossing algorithm)
+
+</ul>
+
+
+
+<h3>More reading</h3>
+
+Several algorithm are known for Computing the visible polygon  in O(n) time, for example: 
+
+<ul>
+  <li><a href="http://cs.smith.edu/~jorourke/books/ArtGalleryTheorems/Art_Gallery_Chapter_8.pdf">Joe
+											  and
+											  Simpson's
+											  O(n)
+											  visibility
+											  polygon</a>
+											  
+  <li><a href="https://arxiv.org/pdf/1403.3905v1.pdf">Efficient computation
+											  of
+											  visibility
+											  polygons</a>
+											  (2014)
+  
+</ul>
+
+Some cool apps: 
+<ul>
+<li><a href="http://ncase.me/sight-and-light/">Sight-and-light</a> 
+
+<li>    <a href="https://legends2k.github.io/2d-fov/">Field of view and los in 2d</a>
+  
+
+<li><a href="http://www.redblobgames.com/articles/visibility/">2d
+    visibility</a>
+</ul>
+
+
+
+
+
+
+<h2>What to turn in</h2>
+
+<ul>
+  <li> push your code into your GItHub repo 
+  <li> you will fill in a self-report in class
+</ul>
+
+
+
+
+
+
+
+<h2>Enjoy!</h2>
+
+<hr>
+<h2>Grading</h2>
+
+Functionality: 80 points 
+<ul>
+  <li>+50 points: find all visible vertices of the polygon  
+  <li>+20 points: find the vertices of the visible polygon that fall
+  on the edges and interleave them in the right order
+
+
+  <li>+10 points: moving guard
+</ul>
+
+Code Style: 20 points 
+<ul>
+<li>+0-10 points: poor to medium code.
+<li>+10-20 points: medium to excellent code.
+</ul>
+
+
+</body> </html>

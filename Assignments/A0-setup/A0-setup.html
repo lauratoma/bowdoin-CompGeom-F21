@@ -1,0 +1,402 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+
+<style type="text/css">body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=4;color:black}
+h2 { font-size=4; color:blue}
+h3 { font-size=3; color:blue;}
+</style>
+
+
+<title>Assignment 0: Setup</title>
+</head>
+
+<body>
+
+
+<h1>Assignment 0: Setup</h1>
+
+
+<hr>
+<h3>Slack setup</h3>
+
+We'll be using <a href="https://www.slack.com">Slack</a> for
+communication outside of class.  If this is your first time using
+Slack, worry not --- you'll pick it up quickly and there's a good
+chance you'll use it beyond Bowdoin.
+
+The advantage of using Slack over email is that it keeps all messages in one place, it's
+easy to keep conversations organized, and has a lot more cool options
+to facilitate communication and team-building.
+
+Compared to the discussion forum
+in Blackboard -- Slack is more versatile and if you download the
+desktop app (encouraged), it works like an email app; you stay logged
+in and it notifies you when there are new nessages. 
+
+<p>I do not plan to use email at all for communication, and will send all
+class annoucements via Slack. I encourage everyone to do the same. If
+you want to send me a private  message, Slack has the option of a
+"direct message (DM)". You can DM me, or anyone else in the class. And
+you can create your own channels, which can be private, to which you
+can invite your team mates (for e.g. when team-working on a project!
+really cool feature!). 
+
+I created three channels: #class (for all class communication and file
+sharing), #assignments (for all assignment-related communication),
+#general (for general announcements), and #random (for everything else).
+
+
+<ol>
+
+  <li> Start by reading/watching a start guide: 
+  <a
+  href="https://slack.com/help/articles/360059928654-How-to-use-Slack--your-quick-start-guide??&utm_source=hppromo&utm_medium=promo">How
+  to use Slack: Your quick start guide</a>
+
+  <p><li>Go to Blackboard, enter this course, and you'll find a
+  signup link for Slack. Use it  and sign up (using your bowdoin
+  email).
+
+  <p><li>You can access Slack via the web interface, but I encourage you
+  to download the <a href="https://slack.com/downloads/">Slack desktop app</a>; it works like
+  an email client and you'll be able to see notifications right away.
+  There is also a Slack mobile app.
+
+  <p><li><a
+  href="https://slack.com/help/articles/201355156-Configure-your-Slack-notifications">Configure
+  your Slack notifications</a> Set your notifications to "All new
+  messages". At the bottom of the Notifications preferences, under
+  "When I'm not active on desktop", you may want to check the "Send me
+  email notifications" box, particularly if you might otherwise not be
+  signed into Slack on a regular basis.
+
+  <p><li><font color="green">Once you are into Slack, send a hello
+  message  to class and a short introduction  (use the
+  #class channel), and send me a quick DM.</font>
+</ol>
+
+<hr>
+<h3>Compiling and running a C/C++ program from the terminal</h3>
+
+Follow these <a
+href="_basics.html">steps</a>
+to create a Hello World program, and compile it and run it from the
+terminal. 
+
+<p>Nothing to submit, just warmup.  If you run into problems, post on Slack!
+
+
+<hr>
+<h3>Unix crash course</h3>
+
+Go through the <a
+href="https://tildesites.bowdoin.edu/~sbarker/unix/">Unix crash
+course</a> maintained by my colleague Sean Barker (except for the
+version control section at the very end).
+
+You don't need to know everything upfront, but starting week 2 being
+familiar will greatly help.
+
+<p>Nothing to submit.  As always, if you run into problems, post
+on Slack! 
+
+
+<hr>
+<h3>Version Control with <Tt>Git</Tt></h3>
+
+
+<p>Some of you may be familiar with  <tt>Git</tt> and <tt>Github</tt> from
+csci2330: Systems. If so, go quickly over this section to refresh your
+memory and make sure you don't miss anything.
+
+If this is the first time you see <tt>Git</tt>, you may want to check
+out the detailed <a
+href="https://tildesites.bowdoin.edu/~sbarker/unix/git.html">Git
+tutorial</a> maintained by Sean Barker.
+
+
+
+<p><a href="https://git-scm.com">Git</a> is an open-source, distributed
+    version control software, initially developed by Linus Torvalds
+    for Linux. <a href="https://github.com">GitHub</a> implements a web-based
+    version of <tt>git</tt> where users, in addition to using <tt>git</tt> commands,
+    can store their repositories "into the cloud". GitHub offers
+    all the functionality of <tt>git</tt> plus extra features (like wiki pages
+    for each project; networking features like feeds and
+    followers). GitHub has 20+ million users, and it's become a
+    virtual meeting place for software developpers, for sharing
+    information and showcasing projects.
+
+
+<p><strong>How it works, in a nutshell: </strong> With Github you and
+your peers can work together on projects from anywhere in the
+world. Initially you (or someone else) will create a remote master
+repository for your project. This master repository is
+hosted remotely, on github. You (and your partners, if any) will then
+clone (checkout) a private copy of the remote master repository on
+your local machine. You can clone several copies of the master repo in
+several locations, if you want.
+
+You can make changes to your local copy. When you are done, you stage
+these changes for commit, and then you push them to the master
+repository. Once your changes are pushed to the master repo, your
+partners can get them by "pulling" the changes from the master repo
+into their local repo. <Tt>Git</Tt> automatically merges the changes pulled
+form the master with the local changes in the local repo. <Tt>Git</Tt> keeps a
+record of all changes, and any change can be reverted.
+
+
+<p>To start, create a Github account, if you don't have one already.
+ Before you starting using the <Tt>Git</Tt> command on the command line, you
+need to give it a basic configuration. This will tell <Tt>Git</Tt> who you are,
+making it easy for you and your partners to identify who committed code
+to your shared repository.
+
+Replace the email and name strings with your email address and
+name. If you have not run these commands, then the very first <Tt>Git</Tt>
+commit will fail and tell you to run them.
+
+<pre>
+git config --global user.email "username@bowdoin.edu"
+git config --global user.name "Your Name"
+git config --global push.default simple
+</pre>
+
+
+<h4>Set up authentication with SSH-key</h4>
+
+With Github you can authenticate with a password, or with an SSH-key;
+  the latter is more secure and might become required, so it's worth
+  taking the time to set it up.
+
+<p>To authenticate using an SSH-key, a user must have an SSH-key pair
+on their local computer.  An SSH-key consists of a private key and a
+public key. The public key can be shared with anyone, and the private
+key needs to be kept confidential (just like a password).
+
+<p>How it works:
+<ul>
+  <li>
+  When the user (the client) wants to connect to the
+server (the host) vis SSH-key authentication, it will send her public
+key to the host.
+
+  <li>The host will will generate a random string and it will encrypt
+it with using the public key. This encrypted message can only be
+decrypted with the associated private key.
+
+  <li>The host will send this encrypted message to the user's client
+to test whether they actually have the associated private key.
+
+  <li>The client will decrypt the message using the private key and
+obtain the random string, and send it back to the host.
+
+  <li>The server compares the string received from the client with the
+  original string, and determines whether the client has the private
+  key.
+
+  </ul>
+  
+
+  <p>Setting up SSH-key authentication in Github: 
+  <ol>
+    <li><strong>Check to see if you have an SSH-key and if not,
+    generate one: </strong>
+    
+    <br>If you have
+    one, it must be in <tt>~/.ssh/</tt>; If you see an
+    <tt>id_rsa.pub</tt> file, or something like this, it means you already have a public key. If
+    you don't see one, then generate one.
+    
+    To generate an SSH-key: In the terminal, use the
+    <tt>ssh-keygen</tt> command. SSH keys are 2048 bits by default; To
+    specify a larger number of bits, include the <tt>-b</tt> argument
+    followed by the number of bits you would like. We'll use 4096 as
+    per Githib's recommendation. 
+
+    <pre>ssh-keygen -t rsa -b 4096 -C "youremail@bowdoin.edu" </pre>
+    
+  This uses the RSA algorithm and creates a new public/private SSH key
+  pair on your computer, using the provided email as a label.  When it
+  prompts you to enter a file to save the key, press Enter to accept
+  the default. AT the next prompt, type a secure passphrase.
+
+  A passphrase should be hard to guess, have at least 15 characters,
+  contain a combination if letters and diGits and punctuation
+    characters.
+
+    
+  <p>This has generated an RSA SSH key pair, located in the
+  <tt>.ssh</tt> hidden directory in your home directory.  These files
+  are:
+
+  <pre>~/.ssh/id_rsa    <------------ the private key. DO NOT SHARE!!!
+~/.ssh/id_rsa.pub   <--------- the associate public key. This can be shared freely 
+</pre>
+
+
+    <p><li><strong>Configure your SSH-client  on the machine from where you
+    connect to Github, to use your SSH-key for authentication:</strong>
+
+    <br>To do that, modify your <tt>~/.ssh/config</tt> file to
+    automatically load keys into the SSH-agent and store passphrases
+    in your keychain. You can do this with your favorite editor (for
+    e.g. <tt>nano, atom, emacs, vim </tt>). If this file does not
+    exist, you need to create it.
+
+<pre>
+Host github.com
+   AddKeysToAgent yes
+   UseKeychain yes
+   IdentityFile ~/.ssh/id_rsa
+</pre>
+
+ If you had to create your SSH config file, you'll also need to set the file permissions appropriately:
+
+    <pre>
+chmod 600 ~/.ssh/config
+    </pre>
+
+
+
+    <p><li><strong>Configure Github  to use your SSH-key for
+authentication:</strong>
+
+<br> To do that go to you GitHub  account page.  In the upper-right corner, click
+your profile photo and click Settings.  Click SSH and GPG keys. Click
+"New SSH key". In the In the "Title" field, add a descriptive label
+for the new key. For example, if you're using a personal Mac, you
+might call this key "Personal MacBook Air".
+
+Paste in the contents of your public key file (not your private key
+file!). You can display the contents of your public key file, assuming
+that your public key is named ~/.ssh/id_rsa.pub:
+
+<pre>
+cat ~/.ssh/id_rsa.pub
+</pre>
+
+Paste the output of that command (using your actual filename) into the Key field of the GitHub settings page, then click Add SSH key.
+
+
+  </ol>
+
+  You are now all set to use SSH-key authentication with GitHub.
+
+  When you clone a project, you'll need to go to the GitHub
+repository code page and copy the SSH URL rather than HTTPS (it will look something like
+git@github.com/some-organization/some-repo-name - don't change any
+part of this). Use this URL in your initial clone command, and you
+should never need to enter a username or password for GitHub. Note
+that you may need to enter "yes" to accept the key the first time you
+run a <tt>git</tt> command that uses the key (most likely the initial <tt>git</tt>
+clone).
+  
+</ol>
+
+
+<h4>Working with Git/Github</h4>
+
+
+  If you work on an existing repository (this will be the case for the
+  assignments in this class), you'll start by <b>cloning</b> the
+  master repository. You'll receive a link for a GitHub repository
+  that cintains starter code. For example, here is a repository
+  which holds a <tt>Helloworld</tt> program:
+
+
+  <pre>git@github.com:lauratoma/helloworld.git</tt></pre>
+
+  First you will go to the path where you want to place your local
+directory. For example, I have a directory called <tt>CompGeom</tt> on
+my Desktop: 
+<pre>
+cd ~/Desktop/CompGeom
+</pre>
+
+ Now clone it: 
+
+  <pre>
+git clone git@github.com:lauratoma/helloworld.git
+</pre>
+
+This will create a folder called helloworld, with a file hello.c
+inside it.
+
+<pre>
+cd helloworld
+ls
+hello.c
+README.md
+</pre>
+
+
+Once cloned, the usual work cycle in Git is <strong>pull-add-commit-push:</strong>
+
+<ul>
+
+  <li>Always start by pulling the most recent version from
+  the master (if you don't have a partner, this is not necessary
+  unless you pushed changes from a different repo; but it's always
+  safe to do it and it is good practice).
+ 
+<pre>
+cd ~/Desktop/helloworld
+git pull
+</pre>
+
+  Now your local repo is sync-ed with the master repo.
+  
+  <p><li>Now you can start working on the project: edit existing files
+  and create new files.  When you are done do a <tt>git status</tt> to
+  find out the status of your repo: <pre> git status </pre> this will
+  show you what files are modified. Now stage the files that you want
+  to commit. For example let's say you modified
+  <tt>hello.c</tt>. You'll want to stage it:
+
+  
+  <pre>
+git add hello.c
+</pre>
+
+Note: You should never add object files (.o files) and executables to the repo. 
+  
+  <p><li>Commit to your local repo: 
+
+  <pre>
+git commit -m "describe what the changes represent"
+</pre>
+
+  Note that <tt>commit</tt> does not take file names as arguments, and will
+  update the local repo with the files that have been staged. Files
+  that have not been specifically staged for commit, will not be
+  commited.
+
+  <p><li>Push the changes to the master repo: 
+
+<pre>
+git push 
+</pre>
+</ul>
+
+Again, <tt>git push</tt>  does not take file names as arguments; it will
+sync the master repo with the commited files in the local repo.
+
+
+<p>There are more advanced featured of <tt>git</tt> which you may or may
+not need later, like  branching, resolving merge conflicts, 
+reversing changes, deleting files, and more  ---- we'll figure those out later when the need
+arises. For now these basics commands will suffice. 
+
+
+<hr>
+
+That's it for now! 
+
+
+ </body> </html>
+
+

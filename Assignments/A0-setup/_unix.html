@@ -1,0 +1,390 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+
+<style type="text/css">body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=5;color:black}
+h2 { font-size=4; color:blue}
+h3 { font-size=3; color:gray;}
+</style>
+
+
+<title>Some basic Unix commands</title>
+</head>
+
+<body>
+<h1>Some basic Unix commands</h1>
+
+
+<h2>Connecting to a remote host</h2>
+
+Command: <tt>ssh</tt>. Stands for 'secure shell'. 
+
+<p>At Bowdoin there are two public remote hosts running Linux: <tt>dover</tt> and
+<tt>foxtrot</tt>.  They are public and accessible to everyone.  Use them as you
+like, but be careful not to run intensive processes because that will
+slow down the machine and disturb anyone else who might be using it.
+
+<p>Example:
+
+<pre>
+ssh dover 
+</pre>
+
+By default, without user name, this assumes the same user name as on
+the current machine.  To specify a different user name use:
+
+<pre>ssh ltoma&copy;dover</pre>
+or 
+<pre>ssh -l ltoma  dover</pre>
+
+If you are on the Bowdoin network, it is sufficient to specify the
+name of the host. If you were outside campus, you would use
+<tt>dover.bowdoin.edu</tt> instead of <tt>dover</tt>:
+
+<p>To exit the session: 
+<pre>
+logout 
+</pre>
+or
+<pre>
+exit
+</pre>
+
+
+<h2>Getting help</h2>
+
+Use command <tt>man</tt>: 
+
+<pre>
+man [command-name]:    get description of command 
+
+<p>man -k [keyword] :  list commands containing keyword 
+</pre>
+
+
+
+
+
+
+<h2>Directory manipulation</h2>
+
+<pre>
+pwd:  stands for 'print working directory'.
+     Prints current  directory name (path).
+</pre>
+
+<pre>
+cd [pathname]:   stands for 'change directory'.
+       Change the current directory to the one specified.
+       Note: pathname  can be relative  or absolute. 
+</pre>
+
+<pre>
+cd ..: go to parent directory 
+</pre>
+
+<pre>
+ls:  stands for 'list'. List files in current directory. 
+</pre>
+
+To see arguments, type: 
+
+<pre>
+man ls
+</pre>
+
+Some useful arguments:
+<pre>
+ls -a: list all. You will see hidden files. 
+
+ls -l: list long format. You will see all attributes  of files.  
+
+ls -lh: print sizes nicely using K, M, G
+</pre>
+
+
+<pre>
+mkdir [pathname]: stands for 'make directory'. Creates a new directory. 
+</pre>
+
+
+<pre>
+rm [pathname]:  remove the file specified by [pathname]
+</pre>
+
+Try using it to remove a whole directory.  You'll see that it does not
+work.  Now try this:
+
+<pre>
+rm -R /var/tmp/out
+</pre>
+
+This removes recursively the directory, that is it removes the
+directory and everything inside it.
+
+<pre>
+rmdir [pathname]: stands for 'remove directory'.
+       Removes the specified directory.
+       If the directory is not empty, you'll need to use argument '-R'. 
+</pre>
+
+
+
+
+
+<h2>File manipulation</h2> 
+
+<pre>
+cat  [filename]:   print out contents of file on screen. 
+
+cat [file1]  [file2] :   concatenate [file1] and  [file2] (their contents)
+                         and print the result on the screen. 
+</pre>
+
+<pre>
+mv [old] [new] :  old and new are pathnames.
+           Move one to the other.
+           Note: can move files or whole directories. 
+</pre>
+
+<pre>
+cp [old] [new]:  old and new are pathnames.
+          Copy the file from the old pathname to the new one.
+          The file is copied and thus the original [old] still exists. 
+</pre>
+
+To copy directories with cp, need to use argument '-R' which stands for 'recursive': 
+
+<pre>
+cp -R /var/tmp/misc  /var/tmp/out: this copies folder misc to folder out. 
+</pre>
+
+<pre>
+more [pathname]: one page at a time. spacebar scrolls. q quits. 
+</pre>
+<pre>
+less [pathname] :  like more, but can also move backwards with 'p'. 
+</pre>
+
+<pre>
+chmod: change permission of a file
+</pre>
+Such as:
+<pre>
+chmod +x [filename]: this gives execute permission to everyone
+
+chmod go-r [filename]: this takes away 'read' permission from group and other
+</pre>
+
+Example: 
+
+<pre>
+ls
+-rw-rw-rw-@  1 ltoma  staff    23617 Nov 30  2012 model-layers.pdf
+-rw-rw-rw-@  1 ltoma  staff     7276 Jul  2  2013 paper.aux
+-rw-rw-rw-@  1 ltoma  staff     2771 Jul  1  2013 paper.bbl
+-rw-rw-rw-@  1 ltoma  staff      883 Jul  1  2013 paper.blg
+-rw-rw-rw-@  1 ltoma  staff    22084 Jul  2  2013 paper.log
+-rw-rw-rw-@  1 ltoma  staff  2401983 Jul  2  2013 paper.pdf
+-rw-rw-rw-   1 ltoma  staff   235898 Jul  2  2013 paper.synctex.gz
+-rw-rw-rw-@  1 ltoma  staff    86334 Jul  2  2013 paper.tex
+drwxrwxrwx@ 21 ltoma  staff      714 May 14  2013 plots
+-rw-rw-rw-@  1 ltoma  staff   643927 Apr 24  2013 region.pdf
+-rw-rw-rw-@  1 ltoma  staff    59744 May 23  2012 sig-alternate.cls
+-rw-rw-rw-@  1 ltoma  staff     5736 Jul  1  2013 vis.bib
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ 
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ chmod go-r vis.bib 
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ls -l vis.bib 
+-rw--w--w-@ 1 ltoma  staff  5736 Jul  1  2013 vis.bib
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ 
+</pre>
+
+<pre>
+head [filename]: display the first few lines of [filename]
+</pre>
+
+<pre>
+tail [filename]: display the last few lines of [filename]
+</pre>
+
+<pre>
+grep [pattern] [filename]: search for  [pattern] in [filename].
+</pre>
+
+<pre>
+wc [filename]: word count 
+	use -l to count lines
+	use -w to count words 
+</pre>
+
+
+
+<h2>Miscellaneous</h2>
+
+<pre>
+date: show current date and time
+</pre>
+
+<pre>
+who:   show users who are logged in on the machine 
+</pre>
+
+<pre>
+w:   show users and what they are doing 
+</pre>
+
+<pre>
+df: display free disk space. Easier to read if used  with option '-h'. 
+</pre>
+Example:
+<pre>
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ df
+Filesystem    512-blocks      Used Available Capacity  iused    ifree %iused  Mounted on
+/dev/disk0s2   975425848 532155360 442758488    55% 66583418 55344811   55%   /
+devfs                365       365         0   100%      634        0  100%   /dev
+map -hosts             0         0         0   100%        0        0  100%   /net
+map auto_home          0         0         0   100%        0        0  100%   /home
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ df -h
+Filesystem      Size   Used  Avail Capacity  iused    ifree %iused  Mounted on
+/dev/disk0s2   465Gi  254Gi  211Gi    55% 66583418 55344811   55%   /
+devfs          183Ki  183Ki    0Bi   100%      634        0  100%   /dev
+map -hosts       0Bi    0Bi    0Bi   100%        0        0  100%   /net
+map auto_home    0Bi    0Bi    0Bi   100%        0        0  100%   /home
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ 
+</pre>
+
+
+
+<h2>PROCESSES</h2>
+
+<pre>
+top:  display system tasks (processes). 
+</pre>
+
+Example:
+<pre>
+Processes: 197 total, 2 running, 3 stuck, 192 sleeping, 900 threads                                                                                     00:40:27
+Load Avg: 1.12, 0.93, 0.85  CPU usage: 3.24% user, 1.85% sys, 94.89% idle  SharedLibs: 1256K resident, 0B data, 0B linkedit.
+MemRegions: 40266 total, 2181M resident, 77M private, 1513M shared. PhysMem: 6909M used (1524M wired), 8747M unused.
+VM: 502G vsize, 1026M framework vsize, 2249975(0) swapins, 2430156(0) swapouts. Networks: packets: 3300025/3511M in, 2946854/966M out.
+Disks: 766443/42G read, 762492/29G written.
+
+PID   COMMAND      %CPU TIME     #TH   #WQ  #PORT #MREG MEM    RPRVT  PURG   CMPR VPRVT  VSIZE  PGRP PPID STATE    UID  FAULTS    COW     MSGSENT   MSGRECV
+4957  top          6.9  00:00.67 1/1   0    22    36    2360K  2132K  0B     0B   36M    2395M  4957 4631 running  0    13875+    76      841665+   420817+
+4955  mdworker     0.0  00:00.10 3     0    56    70    2864K  1900K  0B     0B   100M   2462M  4955 151  sleeping 501  2927      217     933       364
+4950  mdworker     0.0  00:00.14 3     0    57    71    5056K  4032K  0B     0B   100M   2485M  4950 151  sleeping 501  3633      234     1072      397
+4902  com.apple.We 0.0  00:02.25 12    0    232   570   60M    48M    1116K  0B   427M   3853M  4902 1    sleeping 501  28093     1261    20314     8848
+
+</pre>
+
+<pre>
+ps:   display process status.
+      Most often used with '-f' (f for full) which shows more info
+      -a show info about all users
+      -x show processes without terminals
+</pre>
+Example:
+<pre>
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ps 
+  PID TTY           TIME CMD
+ 4631 ttys000    0:00.08 -bash
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ps -f
+  UID   PID  PPID   C STIME   TTY           TIME CMD
+  501  4631  4629   0 10:45PM ttys000    0:00.12 -bash
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ 
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ps -a
+  PID TTY           TIME CMD
+ 4629 ttys000    0:00.17 login -pf ltoma
+ 4631 ttys000    0:00.08 -bash
+ 4987 ttys000    0:00.00 ps -a
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ps -ax
+  PID TTY           TIME CMD
+    1 ??         1:47.34 /sbin/launchd
+   11 ??         0:11.33 /usr/libexec/UserEventAgent (System)
+   12 ??         0:06.76 /usr/libexec/kextd
+   13 ??         0:05.50 /usr/libexec/taskgated -s
+   14 ??         0:14.46 /usr/sbin/notifyd
+   15 ??         0:14.78 /usr/sbin/securityd -i
+   16 ??         0:01.55 /usr/libexec/diskarbitrationd
+   17 ??         0:22.61 /System/Library/CoreServices/powerd.bundle/powerd
+   18 ??         1:09.53 /usr/libexec/configd
+   ...
+</pre>
+
+
+<h2>Redirecting output</h2>
+
+Example:
+<pre>
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ls paper.*
+paper.aux		paper.blg		paper.pdf		paper.tex
+paper.bbl		paper.log		paper.synctex.gz
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ls paper.*>foo
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ cat foo
+paper.aux
+paper.bbl
+paper.blg
+paper.log
+paper.pdf
+paper.synctex.gz
+paper.tex
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ 
+
+</pre>
+
+
+<h2>Pipes</h2>
+
+Examples:
+<pre>
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ls
+_region_.prv		layers-grid.graffle	model-grid.graffle	paper.bbl		paper.tex
+_region_.tex		layers-grid.pdf		model-grid.pdf		paper.blg		plots
+acm_proc_article-sp.cls	layers-layers.graffle	model-layers.graffle	paper.log		region.pdf
+figures			layers-layers.pdf	model-layers.pdf	paper.pdf		sig-alternate.cls
+foo			los.pdf			paper.aux		paper.synctex.gz	vis.bib
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ ls -l |grep paper
+-rw-rw-rw-@  1 ltoma  staff     7276 Jul  2  2013 paper.aux
+-rw-rw-rw-@  1 ltoma  staff     2771 Jul  1  2013 paper.bbl
+-rw-rw-rw-@  1 ltoma  staff      883 Jul  1  2013 paper.blg
+-rw-rw-rw-@  1 ltoma  staff    22084 Jul  2  2013 paper.log
+-rw-rw-rw-@  1 ltoma  staff  2401983 Jul  2  2013 paper.pdf
+-rw-rw-rw-   1 ltoma  staff   235898 Jul  2  2013 paper.synctex.gz
+-rw-rw-rw-@  1 ltoma  staff    86334 Jul  2  2013 paper.tex
+Lauras-MacBook-Pro:viewshedLI-paper ltoma$ 
+</pre>
+
+Another example: <pre> Lauras-MacBook-Pro:viewshedLI-paper ltoma$ grep
+viewshed paper.tex|wc -l 95 Lauras-MacBook-Pro:viewshedLI-paper ltoma$
+</pre> This searches for all occurences of 'viewshed' in paper.tex, and
+displays each line where it matches. Then pipes this through 'wc' and
+counts the lines.  There are 95 lines that contain occurences of the word
+'viewshed' in paper.tex.
+
+
+<h2>Online tutorials</h2>
+
+Some online resources I found: 
+<ul>
+  <li><a
+  href="http://www.tutorialspoint.com/unix/unix-quick-guide.htm">Unix-quick
+  guide</a> (from tutorialspoint)
+  <li><a
+  href="http://people.ischool.berkeley.edu/~kevin/unix-tutorial/toc.html">Unix
+  tutorial</a> (from Berkeley)
+  <li><a href="http://www.ee.surrey.ac.uk/Teaching/Unix/">Unix
+  tutorial for beginners</a>
+
+  <li> YouTube video: <a href="https://www.youtube.com/watch?v=hbzRWQjA6kI">Unix
+  commands for beginners</a> (U Texas San Antonio)
+<li> <a href="https://www.youtube.com/watch?v=IVquJh3DXUA">Linux for
+  beginners </a>
+  
+</ul>
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Thu Sep  4 01:08:41 EDT 2014 <!-- hhmts end -->
+</body> </html>

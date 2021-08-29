@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<style type="text/css">
+body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=5;color:black}
+h2 { font-s1ize=4; color:blue}
+h3 { font-size=3; color:gray;}
+</style>
+
+<html> <head>
+<title></title>
+</head>
+
+<body>
+<h2>Assignment:  3d hull</h2>
+
+
+
+
+
+<p> Write code (in C/C++) to compute the convex hull of a set of
+points in 3D using either the incremental algorithm, or gift wrapping.
+
+
+<p><b>Starting naive:</b>
+Start by implementing the naive algorithm.  It shoud provide a nice
+motivation for getting the basics working.
+
+
+For simplicity, do not worry about storing the topology of the hull,
+that is, the neighboring information for its faces, edges and
+vertices. Store the hull as an array/vector of faces.
+
+Also, do not worry about handling degeneracies. 
+
+To test, generate points randomly on the sphere, and compute their
+convex hull.
+
+
+<!-- <p><b>Degeneracies: </b> If there exist 4 points that are coplanar and -->
+<!-- extreme, they will lead to a face of the hull that is a polygon with -->
+<!-- more than 3 vertices.  Handling these larger faces will take some -->
+<!-- thinking.  Say the hull contains a face with vertices v1,v2,v3,v4. All -->
+<!-- these points are co-planar. We check v1v2v3 and output it as a -->
+<!-- face. We check v1v2v4 and putput it as a face. We check v2v3v4 and -->
+<!-- output it as a face. ALso v1v3v4 and output is as a face. Therefore -->
+<!-- we'll have overlapping triangles covering one non-triangular face. -->
+<!-- We got a problem. -->
+<!-- Can we come up with an easy solution?  -->
+
+
+<p><b>Going from naive to gift wrapping or incremental:</b>
+A big question will be: what sort of structure do you need to store
+the hull? At the very least the hull will need to store its faces (an
+array/vector of faces on the hull).  Ideally the faces use pointers to
+the points, rather than duplicating the points and their coordinates.
+For example: 
+
+<pre>
+typedef struct _face3d {
+   point3d *p1, *p2, *p3;  //the vertices on this face (in ccw as looking from outside)
+} face3d; 
+</pre>
+
+
+<p>In addition to the faces, you may need to keep track of what vertices
+are on the hull, what edges are on the hull, and whether an edge has
+found both its adjacent faces or only one of them. Come up with
+structures to keep track of these.  Consider using hash tables and maps
+and trees and such, and avoid storing a topological structure for the
+hull (to avoid the complexity or programming).
+
+For example you may want to keep a queue/stack that stores all the
+edges that are on the frontier of the search (in other words: all
+edges that have found only one adjacent face so far).
+
+
+
+<p><b>Degeneracies:</b> If there exist sets of 4 or more points that
+are co-planar, it is possible that faces in the hull are not
+triangular. Whichever algorithm you implement, consider how it can be
+extended to handle degeneracies.
+
+
+
+
+
+<p><b>Base code:</b>
+Base code is provided with the assignment's GitHub repository.
+
+The code should compile as is, but it does not do anything besides
+the interface. You need to add a function that computes the hull, and
+a function that renders the faces of the hull. 
+
+
+<p>Test cases: As with the previous assignment, please provide one
+interesting test case (configuration of points) on which to compute
+the hull.  Every team, please email your special test_cases to the
+whole class on piazza, so that everyone can include everyone's test
+cases in their code.
+
+<p><b>Share!</b> Use piazza!  Share on piazza anything that you stumble on, and
+anything you learn while working on the project, so that the
+whole class can benefit.
+
+
+<p><b>Extra features:</b>
+
+Some ideas: 
+<ul>
+
+<li>Figure out how to draw transparent, and draw the hull faces
+transparent so that we can "see inside".
+
+<li>Use a timerfunc() to make an animation (like the hull turning
+around).
+
+</ul> 
+
+
+
+<p><b>Work in style: </b>
+
+As usual, you need to strive to write not merely code, but simple,
+elegant and easy to understand code. Furthermore, you need to strive
+to do this out of habit, as you start programming, and not only at the
+end. Writing good code has to become your second nature.  Write good
+code not because you have to, but because you don't know any other
+way. 
+
+
+<p>People often disagree what consitutues elegant when it comes to
+coding, but everyone agrees on the following:
+
+<ul>
+  <li>structure your code into small functions with intuitive
+  arguments that allow you to test your code incrementally after every
+  function you add
+  
+  <li>code should be well documented, ideally at block level but
+  certainly at function level.  Every function should have a header
+  specifying what are the expected input values, what is the return value, and what
+  does the function actually do. 
+
+  <li>no function should be longer than a screen
+
+  <li>code should be accompanied by a README tha details how to run
+  it, and whether there are any known bugs that the user shoud be
+  aware of 
+
+  <li>[insert here all style guidelines that you know from pevious classes]
+</ul>
+
+
+<p>How do you know if you write good code? My theory is that the the
+quality of your code is directly proportional to how easy and
+enjoyablet is to debug and update/extend your code.  If you find
+debugging is frustrating and like searching a needle in a haystack,
+then your code style is probably not that good.
+
+
+
+<p><b>What and  how to turn in:</b>
+
+You will receive the assignment on GitHub, including the startup
+code. 
+
+You are encouraged to do pair-programming, but feel free to work
+alone. 
+
+Push your code into your github repository for this
+assignment. 
+
+Provide a README that describe the state of your code (does it work on
+all test cases, do you know of any bugs, any extra features).
+
+
+
+
+<h2>Enjoy!</h2>
+
+
+
+<hr>
+<address></address>
+<!-- hhmts start --> Last modified: Wed Feb 21 22:26:56 EDT 2018 <!-- hhmts end -->
+</body> </html>

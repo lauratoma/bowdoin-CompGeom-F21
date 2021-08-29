@@ -1,0 +1,184 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+
+<style type="text/css">body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=5;color:black}
+h2 { font-size=4; color:blue}
+h3 { font-size=3; color:gray;}
+</style>
+
+
+<title>Compiling and running a C program from the terminal</title>
+</head>
+
+<body>
+<h1>Compiling and running a C/C++ program from the terminal</h1>
+
+We'll go through the process of creating a simple C program using an
+editor, compiling and running from the terminal using a
+Makefile. 
+
+<h2>Setting up a folder</h2>
+
+<p>Locate the 'Terminal' application and double-click on it to open a
+terminal. I'll create a folder called "compsci": 
+
+<pre>
+[ltoma@lobster:~]$ pwd
+/home/ltoma
+[ltoma@lobster:~]$ mkdir compsci
+[ltoma@lobster:~]$ cd compsci/
+[ltoma@lobster:~/compsci]$  ls
+[ltoma@lobster:~/compsci]$ 
+</pre>
+
+Inside it, I'll set up a folder for the first C program:
+
+<pre>
+[ltoma@lobster:~/compsci]$ mkdir hello
+[ltoma@lobster:~/compsci]$cd hello
+</pre>
+
+<h2>Creating a "Hello, world" program</h2>
+
+Now we'll use an editor to create a simple C program to print "hello
+world".  You can use emacs (e.g.  <tt>xemacs</tt>, Aquamacs for
+Apple), <tt>vim</tt>, Sublime, nano, [..]. 
+
+Open the editor, create a new file, and name it
+<tt>hello.c</tt>.  For example, to start <tt>xemacs</tt> from the
+terminal you'll type <tt>xemacs &</tt>; on a Mac, clicking on the
+editor iconwill also work.
+(Note: The ampercend at the end of the command means that the command is to
+be run in the background; the shell prompt does not wait for this
+command to be finished, instead it starts it and comes right back to
+you (to understand the difference try starting <tt>xemacs</tt> without
+the ampercend at the end)).
+
+<p>Once you open  the editor you can start typing the first program: 
+
+<pre> #include < stdio.h >
+
+int main() {
+
+   printf("Hello world!\n");
+   return 1; 
+}
+</pre>
+
+Save this program as "~/compsci/hello/hello.c".  (The symbol "~"
+expands in Unix to the name of your home directory).
+
+
+
+
+<h2>Compiling and running from the terminal</h2>
+
+
+<pre>
+[ltoma@lobster:~/compsci]$ cd hello/
+[ltoma@lobster:~/compsci/hello]$ ls
+hello.c
+[ltoma@lobster:~/compsci/hello]$ ls -l
+total 4
+-rw-r--r-- 1 ltoma cs 78 Sep  8 22:51 hello.c
+[ltoma@lobster:~/compsci/hello]$ 
+</pre>
+Note the file is readable and writeable to the owner, and readable
+only to everybody else. The file is not executable. 
+
+<ol>
+  <li>run the compiler (gcc)  to compile your code into an executable
+  you can run. 
+  <pre>
+gcc hello.c
+  </pre>
+
+  I suggest you use the -g flag to include debugging information
+ (stored in a dsym folder, see below):
+ <pre>
+gcc -g hello.c
+  </pre>
+
+ <li> If there are errors, it will let you know. Otherwise, it creates an
+  executable called <tt>a.out</tt>:
+  
+<pre>
+[ltoma@lobster:~/compsci/hello]$ gcc -g hello.c 
+[ltoma@lobster:~/compsci/hello]$ ls -l
+total 12
+-rwxrwxr-x 1 ltoma cs 7641 Sep  9 12:23 a.out
+-rw-r--r-- 1 ltoma cs   78 Sep  8 22:51 hello.c
+[ltoma@lobster:~/compsci/hello]$ 
+</pre>
+Note that a.out is executable. You can run it: 
+
+<pre>
+[ltoma@lobster:~/compsci/hello]$ ./a.out 
+hello, world
+[ltoma@lobster:~/compsci/hello]$ 
+</pre>
+</ol>
+
+
+
+<p>a.out is the default name for the executable. To specify a different
+name use option "-o":
+<pre>
+[ltoma@lobster:~/compsci/hello]$ gcc -g hello.c  -o hello
+[ltoma@lobster:~/compsci/hello]$ ./hello 
+hello, world
+[ltoma@lobster:~/compsci/hello]$ ls 
+a.out  hello  hello.c
+[ltoma@lobster:~/compsci/hello]$ rm a.out
+[ltoma@lobster:~/compsci/hello]$ 
+</pre>
+
+I suggest you also use option "-Wall" to generate all warnings:
+<pre>
+[ltoma@lobster:~/compsci/hello]$ gcc -g -Wall hello.c -o hello
+[ltoma@lobster:~/compsci/hello]$
+</pre>
+
+
+
+<!-- <h2>Working locally on your laptop and copying over to dover</h2> -->
+
+
+
+<!-- To copy to another unix machine you'll want to use 'scp' (stands for -->
+<!-- secure copy). -->
+
+<!-- <\!-- <pre> -\-> -->
+<!-- <\!-- lobster:hello ltoma$ ls -\-> -->
+<!-- <\!-- a.out			hello		hello.c	 -\-> -->
+<!-- <\!-- lobster:hello ltoma$ scp hello.c ltoma@dover.bowdoin.edu:~/compsci/hello/ -\-> -->
+<!-- <\!-- ltoma@dover.bowdoin.edu's password:  -\-> -->
+<!-- <\!-- hello.c                                       100%   78     0.1KB/s   00:00     -\-> -->
+<!-- <\!-- lobster:hello ltoma$  -\-> -->
+<!-- <\!-- </pre> -\-> -->
+
+
+<!-- <\!-- <h2>Working remotely on a Bowdoin public server</h2> -\-> -->
+
+<!-- <p>We'll start by connecting remotely to Bowdoin server dover and -->
+<!-- setting up a workspace. Locate the 'Terminal' application and -->
+<!-- double-click on it to open a terminal. Then type: -->
+
+<!-- <pre> -->
+<!-- lobster:~ ltoma$ ssh -X dover.bowdoin.edu -->
+<!-- </pre> -->
+
+<!-- Note that we use flag '-X' to enable X11 (windows) forwarding. This -->
+<!-- will come handy for e.g. if you want to run any application that -->
+<!-- will open windows remotely on the machine where you sit. Just to test -->
+<!-- that '-X' worked you could for e.g. run <tt>xterm &</tt> and expect to -->
+<!-- see a new terminal window pop up. -->
+
+<!-- <p> -->
+
+ </body> </html>
+
+

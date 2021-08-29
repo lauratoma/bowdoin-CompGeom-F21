@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+
+
+<style type="text/css">body { margin:1em;}
+pre { background-color:#ddd; padding:10px; margin:20px;}
+h1 { font-size=5;color:black}
+h2 { font-s1ize=4; color:blue}
+h3 { font-size=3; color:gray;}
+</style>
+
+
+
+<title></title>
+</head>
+
+<body> <h2> Assignment 1: Finding the closest pair of points--two
+algorithms and their experimental evaluation</h2>
+
+
+
+<p>In this assignment you will write code to find the closest pair of a set
+of points in the plane using two methods, and you will perform an
+experimental evaluation of the two methods in practice.
+
+
+
+<ol>
+
+  <li>Firs: the naive, quadratic algorithm discussed in class.
+
+
+  <li> Second: a gridded approach to bucket the points into grid cells
+  and then use the grid to speed the search of the closest pair (see
+  last problem in <a href="../../Lectures/L2-closest/ex-closestpair.pdf">closest
+  pair exercises</a>).
+
+</ol>
+
+<p>Experimental evaluation: Perform an experimental evaluation of both
+methods to see how their performance compares in practice.  Denote the
+number of points by <tt>n</tt>. Generate sets of increasingly larger
+size sizes, and time both methods separately, until the difference in
+running times is significant. For e.g. you could pick
+<tt>n=100,1000, 10000, ...</tt>.  Record the running times in a table. 
+
+
+
+<p>This first assignment is meant as a warmup to get everyone up to
+speed with C/C++. It is  also an opportunity to learn what quadratic complexity means in
+practice.
+
+<h3>Comments</h3>
+
+<ul>
+  <li> Use C/C++
+
+  <li> Generate the set of points randomly. Assume they have real
+  coordinates. For consistency, assume the range of the coordinates is
+  <tt>[0; 1,000,000]</tt>.
+  
+  <p><li> The number of points, <tt>n</tt>, should be read as a command
+  line argument. For example,  
+  <pre>
+[ltoma@lobster] ./closest 100
+</pre>
+
+means that it will generate and compute on <tt>n=100</tt> points. Make
+  your functions print out the time they take to run. That way you can run your code with
+  increasingly larger values for <tt>n</tt> and record the results. 
+  
+  
+  <p><li>Implement the functions that compute the closest pair as two
+  separate functions, one corresponding to the naive algorithm and one
+  to the improved, gridded algorithm. For example,
+
+  <pre>
+//compute and print the closest pair in P using the naive algorithm 
+void closest_naive( array of points P)
+
+
+//compute and print the closest pair in P using a gridded approach
+void closest_grid( array of points P)
+
+</pre> <li>Make each function print the points that are closest so
+  that it's easy to check that the two functions actually find the
+  same pair.
+
+  
+  <p><li>For the gridded approach, use a grid of
+  <tt>k</tt>-by-<tt>k</tt> cells. You'll set the value of <tt>k</tt>
+  in order to make the algorithm efficient.  Because the points are
+  uniformly distributed, you can estimate for e.g. how many points do
+  you expect to fall in each cell.  Think of how you would go about
+  finding the closest pair, and how the number of points per cell may
+  influence it.  Using this insight, what value of <tt>k</tt> do you
+  pick?
+
+  <p>The details of this approach are intentionally left open-ended so
+  that you can develop and implement your own ideas.
+
+</ul>
+
+
+<h3>Arrays and vectors in c++</h3>
+
+Feel free to use C, C++, or a combination of the two. You will likely
+need to work with arrays, so I created a simple test program that
+demos how you allocate arrays, which you can find <a href="../../Code/">here</a>. 
+
+<h4>Arrays of integers, C style</h4>
+
+
+<pre>
+  int *a; 
+  
+  /*  DON'T DO THIS: 
+  
+      int a[n]; 
+  
+      It's wrong and you're sure to get segfaults for larger values of
+      n. YOU NEED TO ALLOCATE  dynamically using malloc() because you
+      don't know n at compile time.
+  */ 
+  
+  //allocate the space  dynamically
+  a =(int*)malloc(n * sizeof(int)); 
+  
+  //put some data in it 
+  for (i=0; i < n; i++) 
+    a[i] = 1; 
+
+  //compute something 
+  sum=0; 
+  for (i=0;i< n;i++)
+    sum += a[i]; 
+
+  //free the space 
+  free(a); 
+
+</pre>
+
+
+
+<h4>Array of integers, C++ style</h4>
+
+<pre>
+
+ //an array of n ints, C++ style 
+  int *b; 
+  
+  /*  DON'T DO THIS: 
+      
+      int b[n]; 
+      
+      It's wrong and you're sure to get segfaults for larger values of
+      n. YOU NEED TO ALLOCATE  dynamically using new because you
+      don't know n at compile time.
+  */ 
+    
+
+  //allocate the space  dynamically
+  b = new int[n]; 
+
+  //put some data in it 
+  for (i=0; i < n; i++) 
+    b[i] = 1; 
+
+  //compute something 
+  sum=0; 
+  for (i=0;i < n;i++)
+    sum += b[i]; 
+
+  //free the space 
+  delete [] b; 
+</pre>
+
+
+<h4>Array of vector< int ></h4>
+
+<pre>
+
+ //an array of Vectors, C++ style 
+  vector< int > *d; 
+
+ /*  DON'T DO THIS: 
+      
+      vector< int > d[n]; 
+      
+      It's wrong and you're sure to get segfaults for larger values of
+      n. YOU NEED TO ALLOCATE  dynamically using new because you
+      don't know n at compile time.
+  */ 
+
+  //allocate the space  dynamically
+  d = new vector< int > [n]; 
+  //NOTE: we assume that c++ calls the constructor to create a new Vector at each d[i]
+  
+  //put some data in it 
+  for (i=0; i< n; i++) 
+    //d[i] is a Vector, so we push 1 into it 
+    d[i].push_back(1); 
+
+  //compute something 
+  sum=0; 
+  for (i=0;i< n;i++)
+    sum += d[i][0]; 
+
+  //free the space 
+  delete [] d; 
+
+  printf("test4: sum=%f\n", sum); 
+</pre>
+
+
+
+<h4>2D-array of vector< point ></h4>
+
+<pre>
+
+//a structure for a point in 2D
+typedef struct _point2d {
+  double x, y; 
+} point2d; 
+
+
+//a 2D array of Vectors of points 
+  vector< point2d > **grid; 
+  
+  /*  DON'T DO THIS: 
+
+     vector< point2d > grid [n][n] 
+
+     It's wrong and you're sure to get segfaults for larger values of
+     n. YOU NEED TO ALLOCATE  dynamically using new because you
+     don't know n at compile time.
+  */ 
+
+  //allocate first an array of vector*
+  grid = new vector< point2d >* [n]; 
+  for (i=0; i < n;i++) {
+    //grid[i] is a vector*, that is, an array (of vectors); we allocate it 
+    grid[i] = new vector< point2d > [n]; 
+  }
+
+  //put some data in it 
+  for (i=0; i < n; i++) {
+    for (j=0; j < n; j++) {
+      //grid[i][j] is a Vector, so we push 1 into it 
+      assert(grid[i][j].size()==0); 
+      point2d p = {1.0, 1.0};
+      grid[i][j].push_back(p); 
+      assert(grid[i][j].size()==1); 
+    }
+  }
+ 
+  //compute something 
+  sum=0; 
+  for (i=0; i < n; i++) {
+    for (j=0; j < n; j++) {
+      // grid[i] is a vector;grid[i][j][0] is the first point in that vector
+      sum += grid[i][j][0].x;
+    } 
+  }
+  //free the space 
+  delete [] e;  
+</pre>
+
+
+<h3>What and how to turn in</h3>
+
+
+You will receive the assignment on GitHub, but there will be no
+startup code. You are encouraged to do pair-programming, but feel free
+to work alone. Push your code into your github repository for this
+assignment.  Provide a README where you describe briefly how your
+gridded approach works, how you chose the grid size, and include the
+table of running times.
+
+
+<h3>Enjoy!</h3>
+
+<hr> <address></address>
+<!-- hhmts start -->Last modified: Thu Aug 26 17:03:04 EDT 2021 <!-- hhmts end -->
+</body> </html>
