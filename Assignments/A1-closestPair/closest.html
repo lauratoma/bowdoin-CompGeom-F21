@@ -5,8 +5,8 @@
 <style type="text/css">body { margin:1em;}
 pre { background-color:#ddd; padding:10px; margin:20px;}
 h1 { font-size=5;color:black}
-h2 { font-s1ize=4; color:blue}
-h3 { font-size=3; color:gray;}
+h2 { font-size=3; color:blue}
+h3 { font-size=3; color:green;}
 </style>
 
 
@@ -27,35 +27,41 @@ experimental evaluation of the two methods in practice.
 
 <ol>
 
-  <li>Firs: the naive, quadratic algorithm discussed in class.
+  <li>First: the naive, quadratic algorithm discussed in class.
 
 
-  <li> Second: a gridded approach to bucket the points into grid cells
+  <p> <li> Second: For the second algorithm, you will not implement the
+  optimal divide-and-conquer algorithm, but instead you will develop
+  an approach based on a widely used heuristic which gives good
+  results in practice under certain assumptions about the
+  data. Namely, you'll use a grid to bucket the points into grid cells
   and then use the grid to speed the search of the closest pair (see
-  last problem in <a href="../../Lectures/L2-closest/ex-closestpair.pdf">closest
+  last problem
+  in <a href="../../Lectures/L2-closest/ex-closestpair.pdf">closest
   pair exercises</a>).
 
 </ol>
 
-<p>Experimental evaluation: Perform an experimental evaluation of both
-methods to see how their performance compares in practice.  Denote the
+<p>Experimental evaluation:  Denote the
 number of points by <tt>n</tt>. Generate sets of increasingly larger
 size sizes, and time both methods separately, until the difference in
 running times is significant. For e.g. you could pick
-<tt>n=100,1000, 10000, ...</tt>.  Record the running times in a table. 
+<tt>n=100,1000, 10000, ...</tt>.  Time each method separately, and record the running times in a table. 
 
 
 
-<p>This first assignment is meant as a warmup to get everyone up to
-speed with C/C++. It is  also an opportunity to learn what quadratic complexity means in
-practice.
 
+<p>
 <h3>Comments</h3>
 
 <ul>
-  <li> Use C/C++
+<li>This first assignment is meant as a warmup to get everyone up to
+speed with C/C++. It is  also an opportunity to learn what quadratic complexity means in
+practice, and to go from an idea (the grid approach) to a working algorithm. 
 
-  <li> Generate the set of points randomly. Assume they have real
+  <p><li> Use C/C++, rather than Python. For one, the startup code is given in C/C++. Also,  learning to code in C/C++ is a useful exercise that structures and changes the way you approach programming. 
+
+  <p><li> Generate the set of points randomly. Assume they have real
   coordinates. For consistency, assume the range of the coordinates is
   <tt>[0; 1,000,000]</tt>.
   
@@ -82,7 +88,11 @@ void closest_naive( array of points P)
 //compute and print the closest pair in P using a gridded approach
 void closest_grid( array of points P)
 
-</pre> <li>Make each function print the points that are closest so
+</pre> 
+
+Unless you use vectors, you'll also need to pass in the size of the array. 
+
+<p><li>Make each function print the points that are closest so
   that it's easy to check that the two functions actually find the
   same pair.
 
@@ -99,10 +109,63 @@ void closest_grid( array of points P)
   <p>The details of this approach are intentionally left open-ended so
   that you can develop and implement your own ideas.
 
+    <li>Ideally, your code will work correctly <tt>for any value of k you
+    choose</tt>. That is, it will work if you set k=1, and will work
+    if you set k to such a large value that most of the cells will be
+    empty; for example k=n will mean most cells will be empty since
+    there are n<sup>2</sup> cells and n points.
+
+
+     <p>The value of <tt>k</tt> is either specified by the user on the command line along with n, or is a global variable that you can set at the top of your file. 
+
 </ul>
 
+<h3>Pair programming</h3>
 
-<h3>Arrays and vectors in c++</h3>
+You are encouraged to find a partner and work as a team (make sure you read and follow the pair-programming policy on class website). But if you would rather work alone, or if you don't know anyone in the class yet ---  that's totally fine, just work alone. There are pros to both. 
+
+
+<h3>Help</h3>
+
+My office hours are: 
+
+<ul>
+<li>Mondays 3-4pm 
+<li>Wednesdays 3-4pm
+<li>Fridays 1-3pm 
+</ul>
+
+Come any time to discuss any issues you are encountering or simply to chat.
+
+<p><b>Slack:</b> Use Slack as much as you can, ask questions, and answer questions.  
+ 
+<p>Getting your code to work: Expect you will have to debug your
+code. Remember you are here to learn, so don't compare yourself with
+others. When your code finally works, you created that world and you
+feel like God (paraphrasing Linus Torvalds); but, along the way, you
+make mistakes and you feel stupid. That's the beauty of
+programming. That's normal!
+
+
+<h3>What and how to turn in</h3>
+
+
+You will receive the assignment on GitHub, but there will be no
+startup code. You are encouraged to do pair-programming, but feel free
+to work alone. Push your code into your github repository for this
+assignment.  Provide a README where you describe briefly how your
+gridded approach works, how you chose the grid size, and include the
+ running times.
+
+<p>If you are done with this assignment and you want an extra
+challenge, it will be cool to implement the divide-and-conquer
+algorithm discussed in class.
+
+
+<h3>Enjoy!</h3>
+
+<hr>
+<h3>Review: Arrays and vectors in c++</h3>
 
 Feel free to use C, C++, or a combination of the two. You will likely
 need to work with arrays, so I created a simple test program that
@@ -267,19 +330,8 @@ typedef struct _point2d {
 </pre>
 
 
-<h3>What and how to turn in</h3>
 
-
-You will receive the assignment on GitHub, but there will be no
-startup code. You are encouraged to do pair-programming, but feel free
-to work alone. Push your code into your github repository for this
-assignment.  Provide a README where you describe briefly how your
-gridded approach works, how you chose the grid size, and include the
-table of running times.
-
-
-<h3>Enjoy!</h3>
 
 <hr> <address></address>
-<!-- hhmts start -->Last modified: Thu Aug 26 17:03:04 EDT 2021 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Wed Sep 8th, 17:03:04 EDT 2021 <!-- hhmts end -->
 </body> </html>
