@@ -6,7 +6,7 @@ body { margin:1em;}
 pre { background-color:#ddd; padding:10px; margin:20px;}
 h1 { font-size=5;color:black}
 h2 { font-s1ize=4; color:blue}
-h3 { font-size=3; color:gray;}
+h3 { font-size=3; color:green;}
 </style>
 
 <html> <head>
@@ -134,7 +134,7 @@ consider this issue. Below we assume that the points are
 
 <p>The generic constructor should first sort the points by
 Sort <tt>points</tt> by x-coord and by y-coord using system
-<tt>qsort</tt>. 
+<tt>qsort</tt> (or a different sort). 
 
 <pre>
 point2D *points-by-x, *points-by-y; 
@@ -163,7 +163,7 @@ int bottomToTopCmp(Point2D a, Point2D* b) {
 </pre>
 
 
-<p>After sorting the points, the function shoudl call a helper
+<p>After sorting the points, the function should call a helper
 function that takes more arguments and is recursive. In C it may look
 like this:
 
@@ -276,7 +276,7 @@ everyone's test cases in their code.
 
 Write a function that renders the kd-tree in OpenGL.  
 Use the code for the previous assignments.  The OpenGL part  is
-pretty easy --- basically you need  to draw a filled rectangle/polygon for each leaf node, corresponding to teh regionof that leaf. 
+pretty easy --- basically you need  to draw a filled rectangle/polygon for each leaf node, corresponding to the regionof that leaf. 
 
 <p>This means you shoud probably store regions in nodes.
 
@@ -284,16 +284,19 @@ pretty easy --- basically you need  to draw a filled rectangle/polygon for each 
 WINDOWSIZE]. This is the region fo the root.
 
 
-<p>Render your kd-tree so that it looks similar to a Mondrian painting:
+<p>Render your kd-tree so that it looks similar to a Mondrian
+painting. Below are some examples. 
 
  <center>
 
-<a href="mondrian1.pdf"><img src="mondrian1.pdf" border="0" height="300" align="middle"></a>
+<a href="mondrian1.png"><img src="mondrian1.png" border="0" height="300" align="middle"></a>
 <a href="mondrian2.png"><img src="mondrian2.png" border="0" height="300" align="middle"></a>
 <a href="mondrian3.png"><img src="mondrian3.png" border="0" height="300" align="middle"></a>
 <a href="mondrian4.png"><img src="mondrian4.png" border="0" height="300" align="middle"></a>
 
-
+<a href="painting.png"><img src="painting.png" border="0" height="300"
+align="middle"></a>
+<a href="painting2.png"><img src="painting2.png" border="0" height="300" align="middle"></a>
 </center> 
 
 
@@ -306,12 +309,21 @@ You are encouraged to do pair-programming, but feel free to work
 alone.
 
 
-<h3>What and  how to turn in</h3>
+<h3>What to turn in</h3>
 
-You received the assignment on GitHub.  Provide a README that
-describes the state of your code (does it work on all test cases, do
-you know of any bugs, any extra features).
+<ul>
 
+  <li> Check in your code on GitHub.
+
+  <li>Provide a README that describes
+the state of your code (how to run it, does it work on all test cases, do you know of
+any bugs, did you impemnent any extra features, etc). Basically what
+  you want people to know about your code. 
+
+  <li>Fill in the <a href="./selfreport-kdtrees.pdf">self-reflection report</a> and get it to me (either hard
+  copy in class or DM on slack). 
+
+  </ul>
 
 
 
