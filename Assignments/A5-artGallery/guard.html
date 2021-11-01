@@ -36,7 +36,7 @@ To manage complexity we'll split it into two parts:
 displays the visible area from that point.
 
 
-<p><li>Part 2: Add code so that the guard (last point clicked by the
+<p><li>Part 2: Extend so that the guard (last point clicked by the
 user) is moving inside the polygon, and the visible area is
 displayed as the guard is moving. Make it so that the guard does not
 get stuck in a corner of the polygon.
@@ -56,11 +56,11 @@ You'll find examples on how to use the mouse in the github repo for
 this assignment.
 
 <p><li>The polygon has to be simple. To start, the user should make
-sure that the polygon entered is simple.  Ideally, you'd implement a
+sure that the polygon entered is simple.  Ideally there would be a
 function that tests whether a polygon is simple.
 
 <p><li>The guard has to be inside the polygon. To start, the user
-should make sure it's inside. For extra credit, you can implement a
+should make sure it's inside. Ideally there would be a
 function that tests whether a point is inside a polygon ---- we'll
 talk about this in class, and it's a cool little idea (the degenerate
 cases are messy, but there is full pseudocode in the textbook).
@@ -86,7 +86,7 @@ you think about it a little it becomes clear that its not trivial to
 render a non-convex polygon filled.  Essentially you need to compute
 the triangulation of the polygon, and then render one triangle at a
 time. Computing a triangulation of a non-convex polygon is a bigger
-problem in itself, and OpenGL does not do it. 
+problem in itself, and OpenGL does not do it as part of glDraw. 
 
 You'll need to find a different way to render the visible non-convex
 polygon. Ideally it has to be filled.
@@ -135,18 +135,12 @@ transparently, so that the overlap is easy to see.
 Several algorithm are known for Computing the visible polygon  in O(n) time, for example: 
 
 <ul>
-  <li><a href="http://cs.smith.edu/~jorourke/books/ArtGalleryTheorems/Art_Gallery_Chapter_8.pdf">Joe
-											  and
-											  Simpson's
-											  O(n)
-											  visibility
-											  polygon</a>
+  <li><a
+  href="http://cs.smith.edu/~jorourke/books/ArtGalleryTheorems/Art_Gallery_Chapter_8.pdf">Joe
+  and Simpson's O(n) visibility polygon</a>
 											  
-  <li><a href="https://arxiv.org/pdf/1403.3905v1.pdf">Efficient computation
-											  of
-											  visibility
-											  polygons</a>
-											  (2014)
+  <li><a href="https://arxiv.org/pdf/1403.3905v1.pdf">Efficient
+  computation  of visibility polygons</a> (2014)
   
 </ul>
 
@@ -165,13 +159,28 @@ Some cool apps:
 
 
 
-
-<h2>What to turn in</h2>
+<h3>What to turn in</h3>
 
 <ul>
-  <li> push your code into your GItHub repo 
-  <li> you will fill in a self-report in class
-</ul>
+
+  <li> Check in your code on GitHub.
+
+  <li>Provide a README that describes
+the state of your code (how to run it, does it work on all test cases, do you know of
+any bugs, did you implement any extra features, etc). Basically what
+  you want people to know about your code. 
+
+  <li>Fill in the <a href="./selfreport-artgallery.pdf">self-reflection report</a> and get it to me (either hard
+  copy in class or DM on slack). 
+
+  </ul>
+
+
+
+<h2>Enjoy!</h2>
+
+
+  
 
 
 
