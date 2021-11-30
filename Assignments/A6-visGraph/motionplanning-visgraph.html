@@ -5,7 +5,7 @@ body { margin:1em;}
 pre { background-color:#ddd; padding:10px; margin:20px;}
 h1 { font-size=5;color:black}
 h2 { font-size=4; color:blue}
-h3 { font-size=3; color:gray;}
+h3 { font-size=3; color:green;}
 </style>
 
 
@@ -17,7 +17,7 @@ h3 { font-size=3; color:gray;}
 <body> 
 
 
-<h1>Motion planning via visibility graph: Point robot moving among polygonal obstacles in 2D </h1>
+<h1>Point robot moving among polygonal obstacles in 2D: motion planning via the visibility graph </h1>
 
 
 
@@ -27,8 +27,7 @@ start position <tt>p<sub>start</sub></tt> and an end position
 <tt>p<sub>end</sub></tt>, find a path so that the robot can move from
 start to end, without collisisons.
 
-
-<p>Sometimes, depending on the problem, we might want the <i>shortest
+Sometimes we might want the <i>shortest
 path</i> from <tt>p<sub>start</sub></tt> to <tt>p<sub>end</sub></tt>;
 other times just <i>a path</i> (not necessarily the shortest) may be
 sufficient.
@@ -37,13 +36,10 @@ sufficient.
 <p>General motion planning is difficult. We'll make the following 
 (simplifying) assumptions: <ul>
 
-  <li><b>2D:</b> We'll look at the 2-dimensional motion planning problem: we'll
-  assume that the environment consists of a set of 2D polygons that
-  represent the obstacles; and the robot is a 2D-polygon (convex or
-  not) and does not have joints (i.e. not an articulated robot).
-
-    Furthermore, we assume that the robot is moving in a large bounding
-    box B that contains all polygons.
+  <li><b>2D:</b> We'll assume that the environment consists of a set
+  of 2D polygons that represent the obstacles.  Furthermore, we assume
+  that the robot is moving in a large bounding box B that contains all
+  polygons.
 
   <li><b>Static:</b> We'll assume that the environment is static (the
   obstacles are fixed).
@@ -53,8 +49,8 @@ list of obstacles with their vertices and edges.  That is, the robot
 does not rely on sensors to learn the environment, instead the
 environment is given.  </ul>
 
-<b>Notation:</b>  we'll assume that the obstacles consist of <tt>n</tt>
-edges. So for us <tt>O(n)</tt> represents the complexiy of the
+We'll assume that the obstacles consist of <tt>n</tt>
+edges. So  <tt>O(n)</tt> represents the complexiy of the
 obstacles (vertices plus edges). 
 
 
@@ -118,9 +114,9 @@ but in the simple case of a point robot moving in 2D, we can do
 better.
 
 <center>
-<img src="roadmap1.png" border="0" height="250"
+<img src="roadmap1.png" border="0" height="200"
 align="middle">
-<img src="roadmap2.png" border="0" height="250"
+<img src="roadmap2.png" border="0" height="200"
 align="middle">
 </center>
 
@@ -136,11 +132,11 @@ interior of any obstacle. Below are some screenshots (the first screenshot is fr
 
 
 <center>
-<img src="visgraph.png" border="0" height="200" align="middle">
+<img src="pics-visgraph/visgraph.png" border="0" height="200" align="middle">
 
-<img src="samanjVG.png" border="0" height="300" align="middle">
+<img src="pics-visgraph/samanjVG.png" border="0" height="200" align="middle">
 
-<img src="sonVG.png" border="0" height="300" align="middle">
+<img src="pics-visgraph/sonVG.png" border="0" height="200" align="middle">
 
 </center>
 
@@ -160,20 +156,20 @@ fly, without using at least quadratic time and space to compute and
 store the VG.This was an open problem for a while; the quadratic
 barier was first broken by Joe Mitchell, and subsequently Hershberger
 and Suri (1993) described an optimal (n lg n) algorithm called the
-<i>continuous Dijkstra</i> algorithm. Feel free to search if you are
-curious.
+<i>continuous Dijkstra</i> algorithm.
 
 </ol>
 
 
-<h2>This assignment: Motion planning via VG  for a point robot moving among
-polygonal obstacles in 2D</h2>
+<h2>This assignment</h2>
 
 <ol>
 
- <p> <li>Generate a scene consisting of multiple polygonal obstacles and
-a start and end position. Have a pre-set scene, but also allow the
-user to enter the obstacles by clicking the mouse.
+ <p> <li>Generate a scene consisting of multiple polygonal obstacles
+and a start and end position. Have a pre-set scene when you start, but
+also allow the user to change the start and end position for the same
+scene, and to reset the whole scene and start from scratch entering
+polygons.
 
 
 <p>  <li>Compute and render the visibility graph.
@@ -192,7 +188,7 @@ user to enter the obstacles by clicking the mouse.
 <li> Detect if polygons are overlapping.  
 <li> Draw the polygons <b>filled</b>. Note that openGL can only fill
 correctly convex polygons, so if you want it filled, you'll need to
-provide a triangulation.
+compute a triangulation.
 
 </ul>
 
@@ -200,16 +196,13 @@ provide a triangulation.
 <h2>What to turn in</h2> 
 
 <ul>
-<li>push your code in your github repo 
-<li>you will fill a self report in class
+<li>Check in your code on GitHub.
+<li>Provide a README that describes the state of your code (how to run it, does it work on all test cases, do you know of any bugs, did you implement any extra features, etc). Basically what you want people to know about your code.
+<li>Fill in the <a href="selfreport-visgraph.pdf">self-reflection report</a> and get it to me (either hard copy in class or DM on slack).
 </ul>
 
-<h2>Enjoy!</h2> 
-  
 
-<hr>
-
-<h2>Grading</h2>
+<h2>Some notes on grading</h2>
 <ul>
   <li>+50 points: find al edges in VG, no more, no less (no missing edges, no extraneous edges)
   <li>+20 points: compute shortest path and display it 
@@ -222,7 +215,7 @@ Code Style: 20 points
 <li>+10-20 points: medium to excellent code.
 </ul>
 
-
+<h2>Program well and enjoy!</h2>
 
 
 <address></address>
