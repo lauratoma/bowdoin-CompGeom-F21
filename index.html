@@ -56,18 +56,17 @@ applications in graphics, robotics, autonomous vehicles, vision, image
 processing, and GIS.
 
 Some classical examples of geometric problems: Is a point inside or
-outside a
-polygon? Do two polygons intersect?  Given a set of points in the plane,
-what is  the closest pair of points? What is  the smallest convex polygon
-that contains a set of points in the plane? What are all the points that fall in a given query
-range?  What is visible from a point in a polygon? How many points are
-sufficient to guard any polygon?  Given two sets of segments, what are
-their intersections?   Given a set of points, what is their smallest
-enclosing circle? Given a set of polygonal obstacles, and a polygonal
-robot moving in 2D with tramnslation and rotation, what is an
-efficient path  between a start and end location?  And many others.  
-
-</p><p>This class is an introduction to computational geometry:
+outside a polygon? Do two polygons intersect?  Given a set of points
+in the plane, what is the closest pair of points? What is the smallest
+convex polygon that contains a set of points in the plane? What are
+all the points that fall in a given query range?  What is visible from
+a point in a polygon? How many points are sufficient to guard any
+polygon?  Given two sets of segments, what are their intersections?
+Given a set of points, what is their smallest enclosing circle? Given
+a set of polygonal obstacles, and a polygonal robot moving in 2D with
+translation and rotation, what is an efficient path between a start
+and end location?  And many more. This class is an introduction to
+computational geometry and will cover some of the fundamental problems and techniques in the field. 
 
 
 
@@ -105,17 +104,18 @@ efficient path  between a start and end location?  And many others.
       </li><li>polygon triangulation in O(n lg n) via trapezoidalization. 
     </li></ul>
     </li><li>Geometric searching
-    <ul> <li>orthogonal range searchiing with kd-trees and range trees.
+    <ul> <li>orthogonal range searching with kd-trees and range trees.
     </li></ul>
     
     </li><li><del>Voronoi diagrams and Delaunay triangulations.</del>
-    </li><li>Motion planning in 2D
+    </li><li>Combinatorial motion planning in 2D
     <ul>
-      <li>shortest path in a simple (non-convex) polygon with the funnel algorithm.
-      </li><li>shortest paths among polygonal obstacles via visibility graph.
-      </li><li>computation of the VG with plane sweep.
+      <li><del>shortest path in a simple (non-convex) polygon with the funnel algorithm.</del>
+      </li><li>point robot among polygonal obstacles (trapezoid decomposition, visibility graph)
+      </li><li>polygonal robot moving among polygonal obstacles with translation and rotation
+      <li>C-space and C-obstacles; planning via graph search 
     </li></ul>
-    </li><li>Motion planning in 3D.
+    </li><li>Heuristical motion planning (grid-based techniques, sampling, RRT) 
   </li></ul>
   
   
@@ -146,7 +146,8 @@ class.
 
 <p><strong>Office hours:</strong> 
 </p><ul>
-<li>tbd
+<li>M, W: 3-4pm
+<li>F: 12-2pm
 </li></ul> 
 
 
@@ -154,7 +155,7 @@ class.
 <p><strong>Class webpage:</strong>
 <i>http://tildesites.bowdoin.edu/~ltoma/teaching/cs3250-CompGeom/fall21/</i>. This
 is hosted on my personal website at Bowdoin and will contain all
-class-related materials throuoghout the semester. You can bookmark this page
+class-related materials throughout the semester. You can bookmark this page
 or you can follow the link from my website. 
 
 We will use the class Blackboard site very minimally. 
