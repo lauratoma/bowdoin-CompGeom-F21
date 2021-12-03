@@ -101,12 +101,13 @@ polygon. Ideally it has to be filled.
 The crux of this assignment is to come up with an algorithm to compute
 the visible polygon of the guard. We have not talked specifically
 about this problem in class, so you need to come up with a solution
-form scratch.  A quadratic algorithm will be fine.
+from scratch.  A quadratic algorithm will be fine.
 
-If you can come up with an O(n lg n) algorithm you'll get extra credit
-and a round of applause in class (hint: radial sweep).
+If you implement an O(n lg n) algorithm you'll get extra credit
+and a round of applause in class (hint: radial sweep). If you are
+considering an improved algorithm, the papers
+listed below may be helpful. 
 
-(There are some recent papers describing O(n) algorithms).
 
 
 
@@ -132,7 +133,10 @@ transparently, so that the overlap is easy to see.
 
 <h3>More reading</h3>
 
-Several algorithm are known for Computing the visible polygon  in O(n) time, for example: 
+Several algorithm are known for computing the visible polygon faster
+than the naive O(n<sup>2</sup>) algorithm: the algorithm by  Joe and
+Simpson runs in O(n) time, and the one by Asano in O(n lg n) time. A
+recent algorithm by Mungiu et al seems to be teh fastest in practice. 
 
 <ul>
   <li><a
@@ -141,6 +145,8 @@ Several algorithm are known for Computing the visible polygon  in O(n) time, for
 											  
   <li><a href="https://arxiv.org/pdf/1403.3905v1.pdf">Efficient
   computation  of visibility polygons</a> (2014)
+  <li><a href="https://doc.cgal.org/latest/Visibility_2/index.html#Chapter_2D_Visibility_Computation">CGAL
+  visibility algorithms</a>
   
 </ul>
 
@@ -148,11 +154,16 @@ Some cool apps:
 <ul>
 <li><a href="http://ncase.me/sight-and-light/">Sight-and-light</a> 
 
-<li>    <a href="https://legends2k.github.io/2d-fov/">Field of view and los in 2d</a>
+  <li><a href="https://legends2k.github.io/2d-fov/">Field of view and los in 2d</a>
   
+  
+  <li><a href="http://www.redblobgames.com/articles/visibility/">2d
+  visibility</a>
 
-<li><a href="http://www.redblobgames.com/articles/visibility/">2d
-    visibility</a>
+  <li><a
+  href="https://davidglavas.me/computing-visibility-polygons/">Glavas
+  blog on computing visibility polygons</a>
+
 </ul>
 
 
@@ -171,8 +182,8 @@ any bugs, did you implement any extra features, etc). Basically what
   you want people to know about your code. 
 
   <li>Fill in the <a href="./selfreport-artgallery.pdf">self-reflection report</a> and get it to me (either hard
-  copy in class or DM on slack). 
-
+  copy in class or DM on slack).
+ 
   </ul>
 
 
